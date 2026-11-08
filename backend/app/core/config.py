@@ -54,7 +54,7 @@ class Settings(BaseSettings):
 
     # --- generation ---
     llm_provider: Literal["openrouter", "ollama", "fake"] = "openrouter"
-    llm_model: str = "openrouter/auto"
+    llm_model: str = "nvidia/nemotron-3-ultra-550b-a55b:free"
     llm_temperature: float = 0.2
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     ollama_base_url: str = "http://ollama:11434"

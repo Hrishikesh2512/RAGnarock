@@ -1,115 +1,150 @@
+<div align="center">
+
 # RAGnarock
 
-> A small, readable, open-source Retrieval-Augmented Generation (RAG) system built from scratch without black-box framework abstractions.
+**A small, readable, open-source Retrieval-Augmented Generation (RAG) system built from scratch without framework abstractions.**
 
-RAGnarock is designed as a complete, runnable full-stack application for developers learning how RAG systems work under the hood. It includes a FastAPI backend, a React frontend, local CPU embeddings, vector search via PostgreSQL with `pgvector`, and containerized deployment with Docker Compose.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL 17](https://img.shields.io/badge/PostgreSQL-17_%2B_pgvector-4169E1.svg?logo=postgresql&logoColor=white)](https://github.com/pgvector/pgvector)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Good First Issues](https://img.shields.io/badge/good%20first%20issue-ready-blueviolet.svg)](https://github.com/bit-nodedotai/RAGnarock/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)
+
+<p align="center">
+  <a href="#overview">Overview</a> •
+  <a href="#key-features">Key Features</a> •
+  <a href="#architecture">Architecture</a> •
+  <a href="#quickstart">Quickstart</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#contributing">Contributing</a>
+</p>
+
+</div>
 
 ---
 
-## Architecture at a Glance
+## Overview
+
+RAGnarock is an open-source, contributor-friendly Retrieval-Augmented Generation platform. Unlike tutorial notebooks or black-box framework wrappers (LangChain, LlamaIndex), RAGnarock is built as a **complete, inspectable, and runnable production system** — featuring a typed FastAPI backend, a modern React single-page application, local CPU embeddings, vector search via PostgreSQL with `pgvector`, and Docker containerization.
+
+Designed specifically for developers and open-source contributors, the entire pipeline is implemented in pure Python and TypeScript so every piece of the RAG workflow is transparent and easy to extend.
+
+---
+
+## Key Features
+
+- **Transparent Application Pipeline:** No opaque agent orchestrators or external vector brokers. The application code itself serves as the learning material.
+- **Postgres as the Source of Truth:** Documents, parsed chunks, and 384-dimensional vector embeddings are stored directly in PostgreSQL with `pgvector` (HNSW indexing).
+- **Keyless Server-Side Embeddings:** In-process CPU embeddings via `BAAI/bge-small-en-v1.5`. No embedding API tokens or credit card requirements to chunk and search documents.
+- **BYOK (Bring Your Own Key) Generation:** Secure generation architecture where user keys (OpenRouter) are sent per-request in client headers (`X-Provider-Key`), kept in memory, and never persisted to databases or written to server logs.
+- **Production-Ready Docker Stack:** Single unified Docker Compose configuration powering local hot-reloaded development as well as hardened production deployments with Caddy edge reverse proxying and automated Let's Encrypt TLS.
+
+---
+
+## Architecture
 
 ```mermaid
 flowchart LR
     user["User Browser"]
-    web["React SPA (Vite / Tailwind)"]
-    api["FastAPI Backend"]
-    db[("PostgreSQL 17 + pgvector")]
-    emb["Local Embedder<br/>bge-small-en-v1.5 (CPU)"]
-    llm["LLM Provider<br/>OpenRouter (BYOK)"]
+    web["React SPA<br/>(Vite / Tailwind v4)"]
+    edge["Caddy Edge Reverse Proxy<br/>(Automated TLS)"]
+    api["FastAPI Backend<br/>(Python 3.12 / SQLAlchemy 2)"]
+    db[("PostgreSQL 17 + pgvector<br/>(HNSW Cosine Index)")]
+    emb["Local CPU Embedder<br/>(bge-small-en-v1.5)"]
+    llm["LLM Provider<br/>(OpenRouter BYOK)"]
 
-    user --> web
-    web -->|"HTTP / SSE"| api
+    user -->|"HTTPS"| web
+    user -->|"HTTPS / SSE"| edge
+    edge --> api
     api --> db
-    api -->|"In-Memory Embeddings"| emb
-    api -->|"Chat Generation"| llm
+    api -->|"In-Memory Vectors"| emb
+    api -->|"Chat Completions"| llm
 ```
-
-### Core Design Principles
-- **Readable application code:** No LangChain, LlamaIndex, Celery, or Redis. The pipeline itself is the curriculum.
-- **Postgres is the source of truth:** Chunks, metadata, and embeddings live in Postgres (`pgvector`). Vector indexes are derived and rebuildable.
-- **Keyless local embeddings:** Embeddings are generated in-process on CPU using `BAAI/bge-small-en-v1.5` (384 dimensions). No embedding API keys or credits required.
-- **BYOK (Bring Your Own Key) for generation:** LLM keys are supplied per request via the UI (`X-Provider-Key`), kept only in browser memory, and never persisted or logged by the server.
 
 ---
 
-## Quickstart (Run Locally)
+## Quickstart
 
-The only requirement is **Docker** and **Docker Compose**.
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/)
 
+### 1. Run with Docker Compose
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone https://github.com/bit-nodedotai/RAGnarock.git
 cd RAGnarock
 
-# 2. Copy the environment template
+# Copy environment variables
 cp .env.example .env
 
-# 3. Start the stack
+# Start the full stack
 docker compose up --build
 ```
 
-That's it!
-- **Web App:** [http://localhost:5173](http://localhost:5173)
-- **API Documentation:** [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
-- **API Health:** [http://localhost:8000/health](http://localhost:8000/health)
+### 2. Access the Application
+- **Frontend Workspace:** [http://localhost:5173](http://localhost:5173)
+- **Interactive OpenAPI Docs:** [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+- **API Health Check:** [http://localhost:8000/health](http://localhost:8000/health)
 
-*(In local development, `AUTH_DISABLED=true` is enabled by default, so you can test document uploads and chat immediately without creating an account).*
-
----
-
-## Native Development Setup
-
-If you prefer running services directly on your host machine:
-
-### Backend (Python 3.12 + `uv`)
-
-```bash
-cd backend
-uv sync --extra dev          # Install dependencies into locked venv
-uv run alembic upgrade head  # Run database migrations (requires running Postgres)
-uv run pytest                # Run database-free unit test suite
-uv run ruff check .          # Lint Python code
-uv run ruff format --check . # Format verification
-uv run mypy app              # Strict type checking
-uv run uvicorn app.main:app --reload
-```
-
-### Frontend (React 19 + TypeScript + Vite)
-
-```bash
-cd frontend
-npm ci                       # Install locked dependencies
-npm run dev                  # Start Vite dev server on :5173
-npm run lint                 # ESLint check
-npm run typecheck            # TypeScript compiler check
-npm test                     # Run Vitest test suite
-npm run build                # Production asset build
-```
+*(In development, `AUTH_DISABLED=true` is enabled by default, auto-authenticating a local user so you can test document uploads and chat queries immediately).*
 
 ---
 
-## Tech Stack
+## Repository Structure
 
-| Component | Technology | Description |
-| :--- | :--- | :--- |
-| **Backend** | Python 3.12, FastAPI | Synchronous SQLAlchemy 2.x, psycopg 3, Pydantic v2 |
-| **Vector DB** | PostgreSQL 17 + `pgvector` | HNSW cosine similarity index for chunk retrieval |
-| **Embeddings** | `BAAI/bge-small-en-v1.5` | 384-dimension local CPU SentenceTransformer |
-| **LLM Provider** | OpenRouter (BYOK) | Per-request model key with support for free `:free` models |
-| **Frontend** | React 19, TypeScript, Vite | Tailwind CSS v4, TanStack Query, React Router |
-| **Infrastructure** | Docker Compose, Caddy | Unified container configuration for local dev and production |
+```text
+RAGnarock/
+├── backend/
+│   ├── app/
+│   │   ├── api/          # Route handlers (auth, documents, search, chat)
+│   │   ├── core/         # Settings, logging redaction, and JWT security
+│   │   ├── db/           # SQLAlchemy models (User, Document, Chunk) & sessions
+│   │   ├── embeddings/   # Local bge-small and deterministic fake embedders
+│   │   ├── ingestion/    # Document chunkers and background ingestion pipeline
+│   │   ├── llm/          # OpenRouter BYOK and fake LLM providers
+│   │   └── rag/          # pgvector retriever and citation prompt builder
+│   ├── alembic/          # Database schema migrations
+│   └── tests/            # Pytest test suite (DB-free unit tests)
+├── frontend/
+│   ├── src/
+│   │   ├── api/          # Typed API client and generated schemas
+│   │   ├── app/          # QueryClientProvider and React Router setup
+│   │   ├── features/     # Auth, document library, and chat panels
+│   │   └── pages/        # Workspace page view
+├── infra/
+│   ├── compose.yml       # Local development stack (db, api, web)
+│   ├── compose.prod.yml  # Production deployment stack (db, api, edge)
+│   ├── Caddyfile         # Reverse proxy, security headers, and automated TLS
+│   └── Dockerfile        # Production multi-stage Caddy + SPA image
+├── docs/                 # Architecture specifications and deployment guides
+└── planning/             # Issue manifests and contributor roadmap
+```
+
+---
+
+## Documentation
+
+- **[docs/architecture.md](docs/architecture.md):** The authoritative technical specification and design invariants.
+- **[docs/self_hosting.md](docs/self_hosting.md):** Production single-VM deployment and operations runbook.
+- **[CONTRIBUTING.md](CONTRIBUTING.md):** Contributor guidelines, issue claiming rules, and PR checklists.
+- **[SECURITY.md](SECURITY.md):** Security model, vulnerability reporting, and credential privacy guarantees.
+- **[AGENTS.md](AGENTS.md):** Detailed technical instructions for AI pair-programming agents.
 
 ---
 
 ## Contributing
 
-We welcome contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide and [docs/architecture.md](docs/architecture.md) before submitting pull requests.
+We welcome contributions from developers of all experience levels! Please review our [Contributing Guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
 
-Check out open issues tagged [`good first issue`](https://github.com/bit-nodedotai/RAGnarock/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) to get started!
+To get started:
+1. Browse issues tagged [`good first issue`](https://github.com/bit-nodedotai/RAGnarock/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+2. Comment on the issue to request assignment.
+3. Fork the repository, create your feature branch, and submit a pull request!
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+This project is open-source and licensed under the terms of the [MIT License](LICENSE).

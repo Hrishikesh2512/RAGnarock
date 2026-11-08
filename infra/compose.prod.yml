@@ -39,6 +39,7 @@ services:
       AUTH_DISABLED: "false"
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
       LLM_PROVIDER: openrouter
+      LLM_MODEL: ${LLM_MODEL:-nvidia/nemotron-3-ultra-550b-a55b:free}
       EMBEDDING_PROVIDER: local
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?set ALLOWED_ORIGINS in .env}
     volumes:

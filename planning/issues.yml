@@ -1,0 +1,1721 @@
+# RAGnarock Complete Issue Manifest (150 Issues)
+# Total issues: 150
+# Generated for the junior contributor launch event
+
+issues:
+- id: m0-readme-onboarding
+  milestone: M0
+  title: 'docs: add getting started walk-through and troubleshooting to README'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '1'
+  files_to_touch:
+  - README.md
+  acceptance_test: test -f README.md
+  description: Expand root README.md with detailed platform-specific notes (Windows WSL2 vs Docker Desktop)
+    and quick verification guide.
+- id: m0-contributing-guide-pr-flow
+  milestone: M0
+  title: 'docs: add step-by-step fork, branch, and PR guide to CONTRIBUTING.md'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - CONTRIBUTING.md
+  acceptance_test: test -f CONTRIBUTING.md
+  description: Add an explicit git branching and rebase guide in CONTRIBUTING.md aimed at first-time open-source
+    contributors.
+- id: m0-justfile-recipes
+  milestone: M0
+  title: 'infra: add database reset and seed recipes to justfile'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - justfile
+  acceptance_test: just --list
+  description: Add a 'seed' recipe to justfile that inserts a test document and runs ingestion.
+- id: m0-ci-workflow-timeout
+  milestone: M0
+  title: 'ci: enforce strict 10-minute job timeouts on all GitHub Actions workflows'
+  labels:
+  - infra
+  spec_section: '16'
+  files_to_touch:
+  - .github/workflows/ci-api.yml
+  - .github/workflows/ci-web.yml
+  acceptance_test: grep -r 'timeout-minutes' .github/workflows/
+  description: 'Add timeout-minutes: 10 to every job in ci-api.yml and ci-web.yml to prevent hanging runners.'
+- id: m0-dependabot-config
+  milestone: M0
+  title: 'ci: add Dependabot configuration for GitHub Actions and pip/npm'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '16'
+  files_to_touch:
+  - .github/dependabot.yml
+  acceptance_test: test -f .github/dependabot.yml
+  description: Configure Dependabot to check weekly for GitHub Actions, backend python packages, and frontend
+    npm packages.
+- id: m0-ruff-b008-exemption-test
+  milestone: M0
+  title: 'backend: assert Ruff B008 FastAPI Depends exemption in pyproject.toml'
+  labels:
+  - backend
+  spec_section: '18'
+  files_to_touch:
+  - backend/pyproject.toml
+  acceptance_test: cd backend && uv run ruff check app
+  description: Ensure B008 is properly ignored for Depends and File across all FastAPI routes.
+- id: m0-frontend-lint-staged
+  milestone: M0
+  title: 'frontend: add typecheck npm script and verify strict tsconfig'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - frontend/package.json
+  - frontend/tsconfig.json
+  acceptance_test: cd frontend && npm run typecheck
+  description: Verify that npm run typecheck runs tsc with noEmit and strict null checks enabled.
+- id: m0-dockerignore-cleanup
+  milestone: M0
+  title: 'infra: audit and standardize .dockerignore across backend and frontend'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - .dockerignore
+  - backend/.dockerignore
+  acceptance_test: docker build --no-cache -f backend/Dockerfile backend
+  description: Exclude .mypy_cache, .pytest_cache, tests/, and local .env files from the Docker context.
+- id: m0-editorconfig-standardization
+  milestone: M0
+  title: 'docs: add .editorconfig enforcing UTF-8 and trailing newlines'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - .editorconfig
+  acceptance_test: test -f .editorconfig
+  description: Add an .editorconfig file standardizing 2-space indentation for web/yaml and 4-space for
+    python.
+- id: m0-env-example-validation
+  milestone: M0
+  title: 'backend: add test verifying every field in Settings exists in .env.example'
+  labels:
+  - backend
+  - test
+  spec_section: '12'
+  files_to_touch:
+  - backend/tests/test_config.py
+  acceptance_test: cd backend && uv run pytest tests/test_config.py
+  description: Assert that every setting defined in app.core.config.Settings has a corresponding key in
+    .env.example.
+- id: m0-github-pr-template-labels
+  milestone: M0
+  title: 'docs: enhance PULL_REQUEST_TEMPLATE with testing checklist and spec tags'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - .github/PULL_REQUEST_TEMPLATE.md
+  acceptance_test: test -f .github/PULL_REQUEST_TEMPLATE.md
+  description: Update the PR template with explicit check-boxes for linting, typing, and documentation
+    updates.
+- id: m0-pre-commit-hooks-setup
+  milestone: M0
+  title: 'infra: add optional .pre-commit-config.yaml for local development'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - .pre-commit-config.yaml
+  acceptance_test: test -f .pre-commit-config.yaml
+  description: Add a pre-commit config running ruff check, ruff format, and eslint for contributors who
+    want git hook integration.
+- id: m0-ci-workflow-concurrency-cancel
+  milestone: M0
+  title: 'ci: ensure all workflows cancel in-progress runs on new commits'
+  labels:
+  - infra
+  spec_section: '16'
+  files_to_touch:
+  - .github/workflows/ci-api.yml
+  - .github/workflows/ci-web.yml
+  acceptance_test: 'grep -r ''cancel-in-progress: true'' .github/workflows/'
+  description: Add concurrency group with cancel-in-progress to save GitHub Actions runner minutes.
+- id: m0-caddyfile-syntax-check
+  milestone: M0
+  title: 'infra: add caddy validate check to CI pipeline'
+  labels:
+  - infra
+  spec_section: '18'
+  files_to_touch:
+  - .github/workflows/docker.yml
+  acceptance_test: caddy validate --config infra/Caddyfile
+  description: Ensure changes to infra/Caddyfile are validated for correct syntax in CI.
+- id: m0-architecture-doc-versioning
+  milestone: M0
+  title: 'docs: verify version and date headers in docs/architecture.md'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '1'
+  files_to_touch:
+  - docs/architecture.md
+  acceptance_test: grep 'Version' docs/architecture.md
+  description: Verify architecture document header matches the latest release tag.
+- id: m1-01
+  milestone: M1
+  title: 'backend: define VectorStore protocol abstraction'
+  labels:
+  - backend
+  spec_section: '9.1'
+  files_to_touch:
+  - backend/app/rag/store.py
+  acceptance_test: cd backend && uv run pytest tests/test_vector_store.py
+  description: Implement define VectorStore protocol abstraction according to section 9.1 of docs/architecture.md.
+- id: m1-02
+  milestone: M1
+  title: 'backend: implement PgVectorStore adhering to VectorStore protocol'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '9.1'
+  files_to_touch:
+  - backend/app/rag/pgvector.py
+  acceptance_test: cd backend && uv run pytest tests/test_pgvector_store.py
+  description: Implement implement PgVectorStore adhering to VectorStore protocol according to section
+    9.1 of docs/architecture.md.
+- id: m1-03
+  milestone: M1
+  title: 'backend: formalize EmbeddingProvider protocol with async/sync typing'
+  labels:
+  - backend
+  spec_section: '9.2'
+  files_to_touch:
+  - backend/app/embeddings/base.py
+  acceptance_test: cd backend && uv run pytest tests/test_embeddings.py
+  description: Implement formalize EmbeddingProvider protocol with async/sync typing according to section
+    9.2 of docs/architecture.md.
+- id: m1-04
+  milestone: M1
+  title: 'backend: create Chunker registry and strategy selector'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/chunker.py
+  acceptance_test: cd backend && uv run pytest tests/test_chunker.py
+  description: Implement create Chunker registry and strategy selector according to section 8.1 of docs/architecture.md.
+- id: m1-05
+  milestone: M1
+  title: 'backend: validate Document status state machine transitions'
+  labels:
+  - backend
+  spec_section: '6.3'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion_status.py
+  description: Implement validate Document status state machine transitions according to section 6.3 of
+    docs/architecture.md.
+- id: m1-06
+  milestone: M1
+  title: 'backend: update FakeProvider to yield deterministic token streams'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '9.3'
+  files_to_touch:
+  - backend/app/llm/fake.py
+  acceptance_test: cd backend && uv run pytest tests/test_llm.py
+  description: Implement update FakeProvider to yield deterministic token streams according to section
+    9.3 of docs/architecture.md.
+- id: m1-07
+  milestone: M1
+  title: 'backend: extract inline citation markers [n] from LLM response'
+  labels:
+  - backend
+  spec_section: '8.3'
+  files_to_touch:
+  - backend/app/rag/prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt.py
+  description: Implement extract inline citation markers [n] from LLM response according to section 8.3
+    of docs/architecture.md.
+- id: m1-08
+  milestone: M1
+  title: 'backend: ensure document deletion deletes local file storage and chunk rows'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.2'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_document_delete.py
+  description: Implement ensure document deletion deletes local file storage and chunk rows according
+    to section 7.2 of docs/architecture.md.
+- id: m1-09
+  milestone: M1
+  title: 'backend: add document size validation before writing to disk'
+  labels:
+  - backend
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_upload_limits.py
+  description: Implement add document size validation before writing to disk according to section 13.2
+    of docs/architecture.md.
+- id: m1-10
+  milestone: M1
+  title: 'backend: support UTF-8 BOM encoding gracefully in chunker'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/chunker.py
+  acceptance_test: cd backend && uv run pytest tests/test_chunker.py
+  description: Implement support UTF-8 BOM encoding gracefully in chunker according to section 8.1 of
+    docs/architecture.md.
+- id: m1-11
+  milestone: M1
+  title: 'backend: add HNSW index distance metric verification in alembic'
+  labels:
+  - backend
+  spec_section: '7.3'
+  files_to_touch:
+  - backend/alembic/versions/0001_initial.py
+  acceptance_test: cd backend && uv run pytest tests/test_alembic.py
+  description: Implement add HNSW index distance metric verification in alembic according to section 7.3
+    of docs/architecture.md.
+- id: m1-12
+  milestone: M1
+  title: 'backend: implement query embedding caching for repeated search terms'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.2'
+  files_to_touch:
+  - backend/app/rag/retriever.py
+  acceptance_test: cd backend && uv run pytest tests/test_retriever.py
+  description: Implement implement query embedding caching for repeated search terms according to section
+    8.2 of docs/architecture.md.
+- id: m1-13
+  milestone: M1
+  title: 'backend: sanitize filename strings against directory traversal attacks'
+  labels:
+  - backend
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_documents.py
+  description: Implement sanitize filename strings against directory traversal attacks according to section
+    13.2 of docs/architecture.md.
+- id: m1-14
+  milestone: M1
+  title: 'backend: add retrieval_min_score filtering to similarity searches'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.2'
+  files_to_touch:
+  - backend/app/rag/retriever.py
+  acceptance_test: cd backend && uv run pytest tests/test_retriever.py
+  description: Implement add retrieval_min_score filtering to similarity searches according to section
+    8.2 of docs/architecture.md.
+- id: m1-15
+  milestone: M1
+  title: 'backend: return 404 for non-existent document chunk inspection queries'
+  labels:
+  - backend
+  spec_section: '11.3'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_documents.py
+  description: Implement return 404 for non-existent document chunk inspection queries according to section
+    11.3 of docs/architecture.md.
+- id: m1-16
+  milestone: M1
+  title: 'backend: enforce max document name length of 255 characters'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/db/models/document.py
+  acceptance_test: cd backend && uv run pytest tests/test_documents.py
+  description: Implement enforce max document name length of 255 characters according to section 7.1 of
+    docs/architecture.md.
+- id: m1-17
+  milestone: M1
+  title: 'backend: log document processing duration in ingestion background task'
+  labels:
+  - backend
+  spec_section: '17'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement log document processing duration in ingestion background task according to section
+    17 of docs/architecture.md.
+- id: m1-18
+  milestone: M1
+  title: 'backend: add database session commit retry on concurrency conflict'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/db/session.py
+  acceptance_test: cd backend && uv run pytest tests/test_db.py
+  description: Implement add database session commit retry on concurrency conflict according to section
+    7.1 of docs/architecture.md.
+- id: m1-19
+  milestone: M1
+  title: 'backend: support empty query search gracefully returning zero results'
+  labels:
+  - backend
+  spec_section: '11.5'
+  files_to_touch:
+  - backend/app/api/routes/search.py
+  acceptance_test: cd backend && uv run pytest tests/test_search.py
+  description: Implement support empty query search gracefully returning zero results according to section
+    11.5 of docs/architecture.md.
+- id: m1-20
+  milestone: M1
+  title: 'backend: enforce strict uuid validation on document id path parameter'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '11.3'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_documents.py
+  description: Implement enforce strict uuid validation on document id path parameter according to section
+    11.3 of docs/architecture.md.
+- id: m1-21
+  milestone: M1
+  title: 'backend: add custom repr to Chunk model hiding raw high-dim vector'
+  labels:
+  - backend
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/db/models/chunk.py
+  acceptance_test: cd backend && uv run pytest tests/test_models.py
+  description: Implement add custom repr to Chunk model hiding raw high-dim vector according to section
+    7.1 of docs/architecture.md.
+- id: m1-22
+  milestone: M1
+  title: 'backend: assert pgvector vector extension exists during application startup'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.3'
+  files_to_touch:
+  - backend/app/main.py
+  acceptance_test: cd backend && uv run pytest tests/test_health.py
+  description: Implement assert pgvector vector extension exists during application startup according
+    to section 7.3 of docs/architecture.md.
+- id: m1-23
+  milestone: M1
+  title: 'backend: add structured error detail dictionary to ApiError response'
+  labels:
+  - backend
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/api/errors.py
+  acceptance_test: cd backend && uv run pytest tests/test_errors.py
+  description: Implement add structured error detail dictionary to ApiError response according to section
+    14 of docs/architecture.md.
+- id: m1-24
+  milestone: M1
+  title: 'backend: validate embedding model vector dimension against EMBEDDING_DIM'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '12.4'
+  files_to_touch:
+  - backend/app/embeddings/local.py
+  acceptance_test: cd backend && uv run pytest tests/test_embeddings.py
+  description: Implement validate embedding model vector dimension against EMBEDDING_DIM according to
+    section 12.4 of docs/architecture.md.
+- id: m1-25
+  milestone: M1
+  title: 'backend: add unit test asserting FakeEmbedder returns normalized unit vectors'
+  labels:
+  - backend
+  spec_section: '16'
+  files_to_touch:
+  - backend/tests/test_embeddings.py
+  acceptance_test: cd backend && uv run pytest tests/test_embeddings.py
+  description: Implement add unit test asserting FakeEmbedder returns normalized unit vectors according
+    to section 16 of docs/architecture.md.
+- id: m1-26
+  milestone: M1
+  title: 'backend: prevent duplicate chunk index numbers for a single document'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/db/models/chunk.py
+  acceptance_test: cd backend && uv run pytest tests/test_models.py
+  description: Implement prevent duplicate chunk index numbers for a single document according to section
+    7.1 of docs/architecture.md.
+- id: m1-27
+  milestone: M1
+  title: 'backend: handle database connection drops gracefully with pool_pre_ping'
+  labels:
+  - backend
+  spec_section: '6.2'
+  files_to_touch:
+  - backend/app/db/session.py
+  acceptance_test: cd backend && uv run pytest tests/test_session.py
+  description: Implement handle database connection drops gracefully with pool_pre_ping according to section
+    6.2 of docs/architecture.md.
+- id: m1-28
+  milestone: M1
+  title: 'backend: record total token count in chunk model during ingestion'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement record total token count in chunk model during ingestion according to section
+    7.1 of docs/architecture.md.
+- id: m1-29
+  milestone: M1
+  title: 'backend: add health check query verifying postgres connection readiness'
+  labels:
+  - backend
+  spec_section: '11.1'
+  files_to_touch:
+  - backend/app/api/routes/health.py
+  acceptance_test: cd backend && uv run pytest tests/test_health.py
+  description: Implement add health check query verifying postgres connection readiness according to section
+    11.1 of docs/architecture.md.
+- id: m1-30
+  milestone: M1
+  title: 'backend: document status enum type safety in database and pydantic'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/schemas/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_documents.py
+  description: Implement document status enum type safety in database and pydantic according to section
+    7.1 of docs/architecture.md.
+- id: m2-01
+  milestone: M2
+  title: 'backend: implement Server-Sent Events (SSE) streaming for POST /api/chat'
+  labels:
+  - backend
+  spec_section: '11.4'
+  files_to_touch:
+  - backend/app/api/routes/chat.py
+  acceptance_test: cd backend && uv run pytest tests/test_chat_stream.py
+  description: Implement implement Server-Sent Events (SSE) streaming for POST /api/chat according to
+    section 11.4 of docs/architecture.md.
+- id: m2-02
+  milestone: M2
+  title: 'backend: implement one retry with jitter on OpenRouter 502/503/429'
+  labels:
+  - backend
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/llm/openrouter.py
+  acceptance_test: cd backend && uv run pytest tests/test_openrouter_retry.py
+  description: Implement implement one retry with jitter on OpenRouter 502/503/429 according to section
+    14 of docs/architecture.md.
+- id: m2-03
+  milestone: M2
+  title: 'backend: trim retrieved passages to CONTEXT_MAX_TOKENS'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.2'
+  files_to_touch:
+  - backend/app/rag/prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt_trimming.py
+  description: Implement trim retrieved passages to CONTEXT_MAX_TOKENS according to section 8.2 of docs/architecture.md.
+- id: m2-04
+  milestone: M2
+  title: 'backend: add canary test asserting X-Provider-Key never appears in logs'
+  labels:
+  - backend
+  spec_section: '13.1'
+  files_to_touch:
+  - backend/app/core/logging.py
+  acceptance_test: cd backend && uv run pytest tests/test_logging_redaction.py
+  description: Implement add canary test asserting X-Provider-Key never appears in logs according to section
+    13.1 of docs/architecture.md.
+- id: m2-05
+  milestone: M2
+  title: 'backend: add local Ollama LLM provider behind LLMProvider protocol'
+  labels:
+  - backend
+  spec_section: '9.3'
+  files_to_touch:
+  - backend/app/llm/ollama.py
+  acceptance_test: cd backend && uv run pytest tests/test_ollama.py
+  description: Implement add local Ollama LLM provider behind LLMProvider protocol according to section
+    9.3 of docs/architecture.md.
+- id: m2-06
+  milestone: M2
+  title: 'backend: handle OpenRouter idle timeout after 60 seconds'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/llm/openrouter.py
+  acceptance_test: cd backend && uv run pytest tests/test_llm.py
+  description: Implement handle OpenRouter idle timeout after 60 seconds according to section 14 of docs/architecture.md.
+- id: m2-07
+  milestone: M2
+  title: 'backend: map OpenRouter 401 response to invalid_provider_key ApiError'
+  labels:
+  - backend
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/llm/openrouter.py
+  acceptance_test: cd backend && uv run pytest tests/test_llm.py
+  description: Implement map OpenRouter 401 response to invalid_provider_key ApiError according to section
+    14 of docs/architecture.md.
+- id: m2-08
+  milestone: M2
+  title: 'backend: extract top-k relevant chunks and format with clear citation index headers'
+  labels:
+  - backend
+  spec_section: '8.3'
+  files_to_touch:
+  - backend/app/rag/prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt.py
+  description: Implement extract top-k relevant chunks and format with clear citation index headers according
+    to section 8.3 of docs/architecture.md.
+- id: m2-09
+  milestone: M2
+  title: 'backend: add unit tests verifying prompt builder orders passages by similarity'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.3'
+  files_to_touch:
+  - backend/tests/test_prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt.py
+  description: Implement add unit tests verifying prompt builder orders passages by similarity according
+    to section 8.3 of docs/architecture.md.
+- id: m2-10
+  milestone: M2
+  title: 'backend: support system prompt customization via SYSTEM_PROMPT environment setting'
+  labels:
+  - backend
+  spec_section: '12.5'
+  files_to_touch:
+  - backend/app/core/config.py
+  acceptance_test: cd backend && uv run pytest tests/test_config.py
+  description: Implement support system prompt customization via SYSTEM_PROMPT environment setting according
+    to section 12.5 of docs/architecture.md.
+- id: m2-11
+  milestone: M2
+  title: 'backend: stream partial answer tokens with SSE data: JSON payloads'
+  labels:
+  - backend
+  spec_section: '11.4'
+  files_to_touch:
+  - backend/app/api/routes/chat.py
+  acceptance_test: cd backend && uv run pytest tests/test_chat_stream.py
+  description: 'Implement stream partial answer tokens with SSE data: JSON payloads according to section
+    11.4 of docs/architecture.md.'
+- id: m2-12
+  milestone: M2
+  title: 'backend: emit citation event at end of SSE completion stream'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '11.4'
+  files_to_touch:
+  - backend/app/api/routes/chat.py
+  acceptance_test: cd backend && uv run pytest tests/test_chat_stream.py
+  description: Implement emit citation event at end of SSE completion stream according to section 11.4
+    of docs/architecture.md.
+- id: m2-13
+  milestone: M2
+  title: 'backend: pass request-scoped timeout to httpx client in OpenRouterProvider'
+  labels:
+  - backend
+  spec_section: '9.3'
+  files_to_touch:
+  - backend/app/llm/openrouter.py
+  acceptance_test: cd backend && uv run pytest tests/test_llm.py
+  description: Implement pass request-scoped timeout to httpx client in OpenRouterProvider according to
+    section 9.3 of docs/architecture.md.
+- id: m2-14
+  milestone: M2
+  title: 'backend: add fallback message when retriever finds zero matching chunks'
+  labels:
+  - backend
+  spec_section: '8.3'
+  files_to_touch:
+  - backend/app/rag/prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt.py
+  description: Implement add fallback message when retriever finds zero matching chunks according to section
+    8.3 of docs/architecture.md.
+- id: m2-15
+  milestone: M2
+  title: 'backend: strip Markdown code blocks from generated citation strings'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.3'
+  files_to_touch:
+  - backend/app/rag/prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt.py
+  description: Implement strip Markdown code blocks from generated citation strings according to section
+    8.3 of docs/architecture.md.
+- id: m2-16
+  milestone: M2
+  title: 'backend: assert LLM provider temperature parameter is strictly between 0.0 and 2.0'
+  labels:
+  - backend
+  spec_section: '12.5'
+  files_to_touch:
+  - backend/app/core/config.py
+  acceptance_test: cd backend && uv run pytest tests/test_config.py
+  description: Implement assert LLM provider temperature parameter is strictly between 0.0 and 2.0 according
+    to section 12.5 of docs/architecture.md.
+- id: m2-17
+  milestone: M2
+  title: 'backend: validate LLM model name format preventing header injection'
+  labels:
+  - backend
+  spec_section: '13.1'
+  files_to_touch:
+  - backend/app/llm/openrouter.py
+  acceptance_test: cd backend && uv run pytest tests/test_llm.py
+  description: Implement validate LLM model name format preventing header injection according to section
+    13.1 of docs/architecture.md.
+- id: m2-18
+  milestone: M2
+  title: 'backend: implement OpenRouter usage token count extraction in response headers'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '9.3'
+  files_to_touch:
+  - backend/app/llm/openrouter.py
+  acceptance_test: cd backend && uv run pytest tests/test_llm.py
+  description: Implement implement OpenRouter usage token count extraction in response headers according
+    to section 9.3 of docs/architecture.md.
+- id: m2-19
+  milestone: M2
+  title: 'backend: handle client disconnect gracefully during streaming chat completion'
+  labels:
+  - backend
+  spec_section: '11.4'
+  files_to_touch:
+  - backend/app/api/routes/chat.py
+  acceptance_test: cd backend && uv run pytest tests/test_chat_stream.py
+  description: Implement handle client disconnect gracefully during streaming chat completion according
+    to section 11.4 of docs/architecture.md.
+- id: m2-20
+  milestone: M2
+  title: 'backend: add benchmark test for prompt building overhead under 100 chunks'
+  labels:
+  - backend
+  spec_section: '15'
+  files_to_touch:
+  - backend/tests/test_prompt.py
+  acceptance_test: cd backend && uv run pytest tests/test_prompt.py
+  description: Implement add benchmark test for prompt building overhead under 100 chunks according to
+    section 15 of docs/architecture.md.
+- id: m3-01
+  milestone: M3
+  title: 'backend: implement rotating refresh tokens for JWT authentication'
+  labels:
+  - backend
+  spec_section: '10'
+  files_to_touch:
+  - backend/app/core/security.py
+  acceptance_test: cd backend && uv run pytest tests/test_refresh_token.py
+  description: Implement implement rotating refresh tokens for JWT authentication according to section
+    10 of docs/architecture.md.
+- id: m3-02
+  milestone: M3
+  title: 'backend: add memory-based rate limiting with 429 Retry-After headers'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '12.8'
+  files_to_touch:
+  - backend/app/api/middleware/rate_limit.py
+  acceptance_test: cd backend && uv run pytest tests/test_rate_limit.py
+  description: Implement add memory-based rate limiting with 429 Retry-After headers according to section
+    12.8 of docs/architecture.md.
+- id: m3-03
+  milestone: M3
+  title: 'backend: support guest sessions via HttpOnly SameSite=Lax cookie'
+  labels:
+  - backend
+  spec_section: '13.4'
+  files_to_touch:
+  - backend/app/api/deps.py
+  acceptance_test: cd backend && uv run pytest tests/test_guest_session.py
+  description: Implement support guest sessions via HttpOnly SameSite=Lax cookie according to section
+    13.4 of docs/architecture.md.
+- id: m3-04
+  milestone: M3
+  title: 'backend: enforce workspace-level document ownership filters'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.1'
+  files_to_touch:
+  - backend/app/db/models/document.py
+  acceptance_test: cd backend && uv run pytest tests/test_workspace_isolation.py
+  description: Implement enforce workspace-level document ownership filters according to section 7.1 of
+    docs/architecture.md.
+- id: m3-05
+  milestone: M3
+  title: 'backend: validate password strength requiring min 8 chars with mixed case'
+  labels:
+  - backend
+  spec_section: '13.3'
+  files_to_touch:
+  - backend/app/core/security.py
+  acceptance_test: cd backend && uv run pytest tests/test_security.py
+  description: Implement validate password strength requiring min 8 chars with mixed case according to
+    section 13.3 of docs/architecture.md.
+- id: m3-06
+  milestone: M3
+  title: 'backend: hash user passwords with Argon2id using recommended OWASP parameters'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '13.3'
+  files_to_touch:
+  - backend/app/core/security.py
+  acceptance_test: cd backend && uv run pytest tests/test_security.py
+  description: Implement hash user passwords with Argon2id using recommended OWASP parameters according
+    to section 13.3 of docs/architecture.md.
+- id: m3-07
+  milestone: M3
+  title: 'backend: prevent email enumeration by timing-safe password verification'
+  labels:
+  - backend
+  spec_section: '13.3'
+  files_to_touch:
+  - backend/app/api/routes/auth.py
+  acceptance_test: cd backend && uv run pytest tests/test_auth.py
+  description: Implement prevent email enumeration by timing-safe password verification according to section
+    13.3 of docs/architecture.md.
+- id: m3-08
+  milestone: M3
+  title: 'backend: implement token revocation blacklist for user logout'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '10'
+  files_to_touch:
+  - backend/app/core/security.py
+  acceptance_test: cd backend && uv run pytest tests/test_security.py
+  description: Implement implement token revocation blacklist for user logout according to section 10
+    of docs/architecture.md.
+- id: m3-09
+  milestone: M3
+  title: 'backend: add background purge task for guest sessions older than 7 days'
+  labels:
+  - backend
+  spec_section: '13.4'
+  files_to_touch:
+  - backend/app/tasks/purge.py
+  acceptance_test: cd backend && uv run pytest tests/test_purge.py
+  description: Implement add background purge task for guest sessions older than 7 days according to section
+    13.4 of docs/architecture.md.
+- id: m3-10
+  milestone: M3
+  title: 'backend: return 401 invalid_token when JWT signature check fails'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '10'
+  files_to_touch:
+  - backend/app/core/security.py
+  acceptance_test: cd backend && uv run pytest tests/test_security.py
+  description: Implement return 401 invalid_token when JWT signature check fails according to section
+    10 of docs/architecture.md.
+- id: m3-11
+  milestone: M3
+  title: 'backend: support MAX_DOCS_PER_SESSION upload limit for guest users'
+  labels:
+  - backend
+  spec_section: '12.7'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_upload_limits.py
+  description: Implement support MAX_DOCS_PER_SESSION upload limit for guest users according to section
+    12.7 of docs/architecture.md.
+- id: m3-12
+  milestone: M3
+  title: 'backend: add rate limit bypass whitelist for internal loopback health checks'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '12.8'
+  files_to_touch:
+  - backend/app/api/middleware/rate_limit.py
+  acceptance_test: cd backend && uv run pytest tests/test_rate_limit.py
+  description: Implement add rate limit bypass whitelist for internal loopback health checks according
+    to section 12.8 of docs/architecture.md.
+- id: m3-13
+  milestone: M3
+  title: 'backend: enforce strict bearer token extraction ignoring case in authorization header'
+  labels:
+  - backend
+  spec_section: '10'
+  files_to_touch:
+  - backend/app/api/deps.py
+  acceptance_test: cd backend && uv run pytest tests/test_deps.py
+  description: Implement enforce strict bearer token extraction ignoring case in authorization header
+    according to section 10 of docs/architecture.md.
+- id: m3-14
+  milestone: M3
+  title: 'backend: add auth disabled warning log on server startup in non-dev env'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '12.7'
+  files_to_touch:
+  - backend/app/main.py
+  acceptance_test: cd backend && uv run pytest tests/test_config.py
+  description: Implement add auth disabled warning log on server startup in non-dev env according to section
+    12.7 of docs/architecture.md.
+- id: m3-15
+  milestone: M3
+  title: 'backend: return 409 email_taken when registering an existing email address'
+  labels:
+  - backend
+  spec_section: '11.2'
+  files_to_touch:
+  - backend/app/api/routes/auth.py
+  acceptance_test: cd backend && uv run pytest tests/test_auth.py
+  description: Implement return 409 email_taken when registering an existing email address according to
+    section 11.2 of docs/architecture.md.
+- id: m3-16
+  milestone: M3
+  title: 'backend: expire access tokens strictly after JWT_EXPIRE_MINUTES'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '12.7'
+  files_to_touch:
+  - backend/app/core/security.py
+  acceptance_test: cd backend && uv run pytest tests/test_security.py
+  description: Implement expire access tokens strictly after JWT_EXPIRE_MINUTES according to section 12.7
+    of docs/architecture.md.
+- id: m3-17
+  milestone: M3
+  title: 'backend: enforce lowercase email normalization on registration and login'
+  labels:
+  - backend
+  spec_section: '11.2'
+  files_to_touch:
+  - backend/app/api/routes/auth.py
+  acceptance_test: cd backend && uv run pytest tests/test_auth.py
+  description: Implement enforce lowercase email normalization on registration and login according to
+    section 11.2 of docs/architecture.md.
+- id: m3-18
+  milestone: M3
+  title: 'backend: add user account deletion endpoint with cascading document cleanup'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '11.2'
+  files_to_touch:
+  - backend/app/api/routes/auth.py
+  acceptance_test: cd backend && uv run pytest tests/test_auth.py
+  description: Implement add user account deletion endpoint with cascading document cleanup according
+    to section 11.2 of docs/architecture.md.
+- id: m3-19
+  milestone: M3
+  title: 'backend: support X-Forwarded-For header in IP rate limiter behind reverse proxy'
+  labels:
+  - backend
+  spec_section: '12.8'
+  files_to_touch:
+  - backend/app/api/middleware/rate_limit.py
+  acceptance_test: cd backend && uv run pytest tests/test_rate_limit.py
+  description: Implement support X-Forwarded-For header in IP rate limiter behind reverse proxy according
+    to section 12.8 of docs/architecture.md.
+- id: m3-20
+  milestone: M3
+  title: 'backend: add unit tests for argon2id password verification failure modes'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '16'
+  files_to_touch:
+  - backend/tests/test_security.py
+  acceptance_test: cd backend && uv run pytest tests/test_security.py
+  description: Implement add unit tests for argon2id password verification failure modes according to
+    section 16 of docs/architecture.md.
+- id: m4-01
+  milestone: M4
+  title: 'backend: implement pypdf document parser with page attribution'
+  labels:
+  - backend
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/parsers/pdf.py
+  acceptance_test: cd backend && uv run pytest tests/test_pdf_parser.py
+  description: Implement implement pypdf document parser with page attribution according to section 8.1
+    of docs/architecture.md.
+- id: m4-02
+  milestone: M4
+  title: 'backend: implement DOCX parser using python-docx'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/parsers/docx.py
+  acceptance_test: cd backend && uv run pytest tests/test_docx_parser.py
+  description: Implement implement DOCX parser using python-docx according to section 8.1 of docs/architecture.md.
+- id: m4-03
+  milestone: M4
+  title: 'backend: parse HTML documents with BeautifulSoup stripping scripts and styles'
+  labels:
+  - backend
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/parsers/html.py
+  acceptance_test: cd backend && uv run pytest tests/test_html_parser.py
+  description: Implement parse HTML documents with BeautifulSoup stripping scripts and styles according
+    to section 8.1 of docs/architecture.md.
+- id: m4-04
+  milestone: M4
+  title: 'backend: detect duplicate document uploads via SHA-256 hash'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_duplicate_upload.py
+  description: Implement detect duplicate document uploads via SHA-256 hash according to section 13.2
+    of docs/architecture.md.
+- id: m4-05
+  milestone: M4
+  title: 'backend: enforce MAX_UPLOAD_MB before buffering payload into memory'
+  labels:
+  - backend
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_upload_limits.py
+  description: Implement enforce MAX_UPLOAD_MB before buffering payload into memory according to section
+    13.2 of docs/architecture.md.
+- id: m4-06
+  milestone: M4
+  title: 'backend: detect and reject encrypted or password-protected PDF files'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/ingestion/parsers/pdf.py
+  acceptance_test: cd backend && uv run pytest tests/test_pdf_parser.py
+  description: Implement detect and reject encrypted or password-protected PDF files according to section
+    14 of docs/architecture.md.
+- id: m4-07
+  milestone: M4
+  title: 'backend: reject scanned zero-text PDFs with informative no_extractable_text error'
+  labels:
+  - backend
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/ingestion/parsers/pdf.py
+  acceptance_test: cd backend && uv run pytest tests/test_pdf_parser.py
+  description: Implement reject scanned zero-text PDFs with informative no_extractable_text error according
+    to section 14 of docs/architecture.md.
+- id: m4-08
+  milestone: M4
+  title: 'backend: add per-document parse timeout of 30 seconds to kill runaway parsers'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement add per-document parse timeout of 30 seconds to kill runaway parsers according
+    to section 13.2 of docs/architecture.md.
+- id: m4-09
+  milestone: M4
+  title: 'backend: clean up partial chunks in database when ingestion fails midway'
+  labels:
+  - backend
+  spec_section: '14'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement clean up partial chunks in database when ingestion fails midway according to
+    section 14 of docs/architecture.md.
+- id: m4-10
+  milestone: M4
+  title: 'backend: support S3-compatible object storage backend behind Storage protocol'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '9.4'
+  files_to_touch:
+  - backend/app/storage/s3.py
+  acceptance_test: cd backend && uv run pytest tests/test_storage.py
+  description: Implement support S3-compatible object storage backend behind Storage protocol according
+    to section 9.4 of docs/architecture.md.
+- id: m4-11
+  milestone: M4
+  title: 'backend: add mime type cross-check validating file extension matches magic bytes'
+  labels:
+  - backend
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/api/routes/documents.py
+  acceptance_test: cd backend && uv run pytest tests/test_documents.py
+  description: Implement add mime type cross-check validating file extension matches magic bytes according
+    to section 13.2 of docs/architecture.md.
+- id: m4-12
+  milestone: M4
+  title: 'backend: support zip archive bomb rejection by checking uncompressed ratio'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '13.2'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement support zip archive bomb rejection by checking uncompressed ratio according to
+    section 13.2 of docs/architecture.md.
+- id: m4-13
+  milestone: M4
+  title: 'backend: preserve header hierarchy in markdown parsing (# and ## headings)'
+  labels:
+  - backend
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/chunker.py
+  acceptance_test: cd backend && uv run pytest tests/test_chunker.py
+  description: 'Implement preserve header hierarchy in markdown parsing (# and ## headings) according
+    to section 8.1 of docs/architecture.md.'
+- id: m4-14
+  milestone: M4
+  title: 'backend: clean non-printable control characters from extracted text'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/chunker.py
+  acceptance_test: cd backend && uv run pytest tests/test_chunker.py
+  description: Implement clean non-printable control characters from extracted text according to section
+    8.1 of docs/architecture.md.
+- id: m4-15
+  milestone: M4
+  title: 'backend: extract metadata properties (title, author) from DOCX and PDF files'
+  labels:
+  - backend
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/parsers/pdf.py
+  acceptance_test: cd backend && uv run pytest tests/test_pdf_parser.py
+  description: Implement extract metadata properties (title, author) from DOCX and PDF files according
+    to section 8.1 of docs/architecture.md.
+- id: m4-16
+  milestone: M4
+  title: 'backend: handle malformed UTF-8 characters without raising UnicodeDecodeError'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement handle malformed UTF-8 characters without raising UnicodeDecodeError according
+    to section 8.1 of docs/architecture.md.
+- id: m4-17
+  milestone: M4
+  title: 'backend: add unit tests asserting chunker handles code blocks without splitting'
+  labels:
+  - backend
+  spec_section: '16'
+  files_to_touch:
+  - backend/tests/test_chunker.py
+  acceptance_test: cd backend && uv run pytest tests/test_chunker.py
+  description: Implement add unit tests asserting chunker handles code blocks without splitting according
+    to section 16 of docs/architecture.md.
+- id: m4-18
+  milestone: M4
+  title: 'backend: implement local storage garbage collection for unreferenced storage keys'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '7.2'
+  files_to_touch:
+  - backend/app/storage/local.py
+  acceptance_test: cd backend && uv run pytest tests/test_storage.py
+  description: Implement implement local storage garbage collection for unreferenced storage keys according
+    to section 7.2 of docs/architecture.md.
+- id: m4-19
+  milestone: M4
+  title: 'backend: add batch embedding support in ingestion pipeline respecting batch_size'
+  labels:
+  - backend
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/pipeline.py
+  acceptance_test: cd backend && uv run pytest tests/test_ingestion.py
+  description: Implement add batch embedding support in ingestion pipeline respecting batch_size according
+    to section 8.1 of docs/architecture.md.
+- id: m4-20
+  milestone: M4
+  title: 'backend: support CSV tabular file ingestion converting rows into key-value passages'
+  labels:
+  - backend
+  - good first issue
+  spec_section: '8.1'
+  files_to_touch:
+  - backend/app/ingestion/parsers/csv.py
+  acceptance_test: cd backend && uv run pytest tests/test_csv_parser.py
+  description: Implement support CSV tabular file ingestion converting rows into key-value passages according
+    to section 8.1 of docs/architecture.md.
+- id: m5-01
+  milestone: M5
+  title: 'frontend: implement SSE token streaming in ChatPanel'
+  labels:
+  - frontend
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement implement SSE token streaming in ChatPanel according to section 11.4 of docs/architecture.md.
+- id: m5-02
+  milestone: M5
+  title: 'frontend: click on citation badge jumps to and highlights source passage'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement click on citation badge jumps to and highlights source passage according to section
+    11.4 of docs/architecture.md.
+- id: m5-03
+  milestone: M5
+  title: 'frontend: add search bar and status filter dropdown to document list'
+  labels:
+  - frontend
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add search bar and status filter dropdown to document list according to section
+    11.3 of docs/architecture.md.
+- id: m5-04
+  milestone: M5
+  title: 'frontend: add model selector and temperature slider to settings dialog'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '12.5'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add model selector and temperature slider to settings dialog according to section
+    12.5 of docs/architecture.md.
+- id: m5-05
+  milestone: M5
+  title: 'frontend: accessibility audit for keyboard navigation and screen reader labels'
+  labels:
+  - frontend
+  spec_section: '11'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm run lint
+  description: Implement accessibility audit for keyboard navigation and screen reader labels according
+    to section 11 of docs/architecture.md.
+- id: m5-06
+  milestone: M5
+  title: 'frontend: render Markdown formatting (bold, code blocks, lists) in chat answers'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement render Markdown formatting (bold, code blocks, lists) in chat answers according
+    to section 11.4 of docs/architecture.md.
+- id: m5-07
+  milestone: M5
+  title: 'frontend: add copy-to-clipboard button on generated assistant responses'
+  labels:
+  - frontend
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add copy-to-clipboard button on generated assistant responses according to section
+    11.4 of docs/architecture.md.
+- id: m5-08
+  milestone: M5
+  title: 'frontend: add stop generation button during active SSE completion stream'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add stop generation button during active SSE completion stream according to section
+    11.4 of docs/architecture.md.
+- id: m5-09
+  milestone: M5
+  title: 'frontend: show upload progress percentage bar in DocumentPanel'
+  labels:
+  - frontend
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement show upload progress percentage bar in DocumentPanel according to section 11.3
+    of docs/architecture.md.
+- id: m5-10
+  milestone: M5
+  title: 'frontend: add confirm modal before deleting a document'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add confirm modal before deleting a document according to section 11.3 of docs/architecture.md.
+- id: m5-11
+  milestone: M5
+  title: 'frontend: implement drag-and-drop file upload zone in DocumentPanel'
+  labels:
+  - frontend
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement implement drag-and-drop file upload zone in DocumentPanel according to section
+    11.3 of docs/architecture.md.
+- id: m5-12
+  milestone: M5
+  title: 'frontend: persist OpenRouter API key in sessionStorage with obfuscated preview'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '10'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement persist OpenRouter API key in sessionStorage with obfuscated preview according
+    to section 10 of docs/architecture.md.
+- id: m5-13
+  milestone: M5
+  title: 'frontend: add retry button for failed document ingestion items'
+  labels:
+  - frontend
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add retry button for failed document ingestion items according to section 11.3
+    of docs/architecture.md.
+- id: m5-14
+  milestone: M5
+  title: 'frontend: display human-readable error messages for 413, 415, and 429 status codes'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '14'
+  files_to_touch:
+  - frontend/src/api/client.ts
+  acceptance_test: cd frontend && npm test
+  description: Implement display human-readable error messages for 413, 415, and 429 status codes according
+    to section 14 of docs/architecture.md.
+- id: m5-15
+  milestone: M5
+  title: 'frontend: add chunk inspector drawer showing chunk count and raw passage texts'
+  labels:
+  - frontend
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/chunk-drawer.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add chunk inspector drawer showing chunk count and raw passage texts according
+    to section 11.3 of docs/architecture.md.
+- id: m5-16
+  milestone: M5
+  title: 'frontend: add dark/light theme toggle with Tailwind CSS v4 support'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11'
+  files_to_touch:
+  - frontend/src/app/theme.tsx
+  acceptance_test: cd frontend && npm run build
+  description: Implement add dark/light theme toggle with Tailwind CSS v4 support according to section
+    11 of docs/architecture.md.
+- id: m5-17
+  milestone: M5
+  title: 'frontend: implement Playwright end-to-end test for document upload to answer flow'
+  labels:
+  - frontend
+  spec_section: '16'
+  files_to_touch:
+  - frontend/e2e/rag-flow.spec.ts
+  acceptance_test: cd frontend && npm run e2e
+  description: Implement implement Playwright end-to-end test for document upload to answer flow according
+    to section 16 of docs/architecture.md.
+- id: m5-18
+  milestone: M5
+  title: 'frontend: add regenerate response button on latest user message'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add regenerate response button on latest user message according to section 11.4
+    of docs/architecture.md.
+- id: m5-19
+  milestone: M5
+  title: 'frontend: auto-scroll chat transcript to bottom on incoming streaming tokens'
+  labels:
+  - frontend
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement auto-scroll chat transcript to bottom on incoming streaming tokens according
+    to section 11.4 of docs/architecture.md.
+- id: m5-20
+  milestone: M5
+  title: 'frontend: add empty state illustration when document library has zero uploads'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add empty state illustration when document library has zero uploads according
+    to section 11.3 of docs/architecture.md.
+- id: m5-21
+  milestone: M5
+  title: 'frontend: show token count estimates and generation latency metrics badge'
+  labels:
+  - frontend
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement show token count estimates and generation latency metrics badge according to
+    section 11.4 of docs/architecture.md.
+- id: m5-22
+  milestone: M5
+  title: 'frontend: implement clear conversation history action with reset confirmation'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.4'
+  files_to_touch:
+  - frontend/src/features/chat/chat-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement implement clear conversation history action with reset confirmation according
+    to section 11.4 of docs/architecture.md.
+- id: m5-23
+  milestone: M5
+  title: 'frontend: add offline network banner when browser loses internet connectivity'
+  labels:
+  - frontend
+  spec_section: '11'
+  files_to_touch:
+  - frontend/src/features/common/offline-banner.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add offline network banner when browser loses internet connectivity according
+    to section 11 of docs/architecture.md.
+- id: m5-24
+  milestone: M5
+  title: 'frontend: support multi-file upload selection in DocumentPanel'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement support multi-file upload selection in DocumentPanel according to section 11.3
+    of docs/architecture.md.
+- id: m5-25
+  milestone: M5
+  title: 'frontend: add Vitest tests for useAuth authentication context hook'
+  labels:
+  - frontend
+  spec_section: '16'
+  files_to_touch:
+  - frontend/src/features/auth/auth-context.test.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add Vitest tests for useAuth authentication context hook according to section
+    16 of docs/architecture.md.
+- id: m5-26
+  milestone: M5
+  title: 'frontend: add Vitest tests for StatusBadge component rendering all states'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '16'
+  files_to_touch:
+  - frontend/src/features/documents/status-badge.test.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement add Vitest tests for StatusBadge component rendering all states according to
+    section 16 of docs/architecture.md.
+- id: m5-27
+  milestone: M5
+  title: 'frontend: assert initial JavaScript bundle remains strictly under 250 kB gzip'
+  labels:
+  - frontend
+  spec_section: '15'
+  files_to_touch:
+  - frontend/vite.config.ts
+  acceptance_test: cd frontend && npm run build
+  description: Implement assert initial JavaScript bundle remains strictly under 250 kB gzip according
+    to section 15 of docs/architecture.md.
+- id: m5-28
+  milestone: M5
+  title: 'frontend: implement responsive drawer sidebar for mobile viewport navigation'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '11'
+  files_to_touch:
+  - frontend/src/pages/workspace.tsx
+  acceptance_test: cd frontend && npm run build
+  description: Implement implement responsive drawer sidebar for mobile viewport navigation according
+    to section 11 of docs/architecture.md.
+- id: m5-29
+  milestone: M5
+  title: 'frontend: display document file size formatted in KB or MB in document rows'
+  labels:
+  - frontend
+  spec_section: '11.3'
+  files_to_touch:
+  - frontend/src/features/documents/document-panel.tsx
+  acceptance_test: cd frontend && npm test
+  description: Implement display document file size formatted in KB or MB in document rows according to
+    section 11.3 of docs/architecture.md.
+- id: m5-30
+  milestone: M5
+  title: 'frontend: add openapi-typescript CI validation asserting types match backend schema'
+  labels:
+  - frontend
+  - good first issue
+  spec_section: '16'
+  files_to_touch:
+  - frontend/package.json
+  acceptance_test: cd frontend && npm run api:types
+  description: Implement add openapi-typescript CI validation asserting types match backend schema according
+    to section 16 of docs/architecture.md.
+- id: m6-01
+  milestone: M6
+  title: 'infra: add GitHub Actions 6-hour cron polling /health with status alerting'
+  labels:
+  - infra
+  spec_section: '17'
+  files_to_touch:
+  - .github/workflows/healthcheck.yml
+  acceptance_test: test -f .github/workflows/healthcheck.yml
+  description: Implement add GitHub Actions 6-hour cron polling /health with status alerting according
+    to section 17 of docs/architecture.md.
+- id: m6-02
+  milestone: M6
+  title: 'infra: create automated pg_dump and tar backup script with rotation'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '17'
+  files_to_touch:
+  - scripts/backup.sh
+  acceptance_test: test -f scripts/backup.sh
+  description: Implement create automated pg_dump and tar backup script with rotation according to section
+    17 of docs/architecture.md.
+- id: m6-03
+  milestone: M6
+  title: 'infra: document EC2 log rotation configuration for docker containers'
+  labels:
+  - infra
+  spec_section: '17'
+  files_to_touch:
+  - docs/self_hosting.md
+  acceptance_test: test -f docs/self_hosting.md
+  description: Implement document EC2 log rotation configuration for docker containers according to section
+    17 of docs/architecture.md.
+- id: m6-04
+  milestone: M6
+  title: 'infra: implement database restore rehearsal script validating pg_restore'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '17'
+  files_to_touch:
+  - scripts/restore.sh
+  acceptance_test: test -f scripts/restore.sh
+  description: Implement implement database restore rehearsal script validating pg_restore according to
+    section 17 of docs/architecture.md.
+- id: m6-05
+  milestone: M6
+  title: 'infra: configure Caddy security headers with strict Content-Security-Policy'
+  labels:
+  - infra
+  spec_section: '13.1'
+  files_to_touch:
+  - infra/Caddyfile
+  acceptance_test: caddy validate --config infra/Caddyfile
+  description: Implement configure Caddy security headers with strict Content-Security-Policy according
+    to section 13.1 of docs/architecture.md.
+- id: m6-06
+  milestone: M6
+  title: 'infra: add Docker healthcheck test asserting Uvicorn responds within 5 seconds'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '14'
+  files_to_touch:
+  - backend/Dockerfile
+  acceptance_test: docker inspect --format='{{.State.Health.Status}}' ragnarock-api
+  description: Implement add Docker healthcheck test asserting Uvicorn responds within 5 seconds according
+    to section 14 of docs/architecture.md.
+- id: m6-07
+  milestone: M6
+  title: 'infra: assert multi-arch ARM64 image builds cleanly on Graviton without emulation'
+  labels:
+  - infra
+  spec_section: '18'
+  files_to_touch:
+  - .github/workflows/docker.yml
+  acceptance_test: test -f .github/workflows/docker.yml
+  description: Implement assert multi-arch ARM64 image builds cleanly on Graviton without emulation according
+    to section 18 of docs/architecture.md.
+- id: m6-08
+  milestone: M6
+  title: 'infra: add memory limits to compose.prod.yml preventing out-of-memory kernel panics'
+  labels:
+  - infra
+  - good first issue
+  spec_section: '15'
+  files_to_touch:
+  - infra/compose.prod.yml
+  acceptance_test: docker compose config
+  description: Implement add memory limits to compose.prod.yml preventing out-of-memory kernel panics
+    according to section 15 of docs/architecture.md.
+- id: m6-09
+  milestone: M6
+  title: 'infra: create automated SSL certificate renewal status monitoring command'
+  labels:
+  - infra
+  spec_section: '17'
+  files_to_touch:
+  - scripts/check_ssl.sh
+  acceptance_test: test -f scripts/check_ssl.sh
+  description: Implement create automated SSL certificate renewal status monitoring command according
+    to section 17 of docs/architecture.md.
+- id: m6-10
+  milestone: M6
+  title: 'docs: document emergency rollback procedure in docs/self_hosting.md'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '14'
+  files_to_touch:
+  - docs/self_hosting.md
+  acceptance_test: test -f docs/self_hosting.md
+  description: Implement document emergency rollback procedure in docs/self_hosting.md according to section
+    14 of docs/architecture.md.
+- id: m7-01
+  milestone: M7
+  title: 'docs: add 15-minute quickstart FAQ and common papercuts to docs/'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '1'
+  files_to_touch:
+  - docs/onboarding.md
+  acceptance_test: test -f docs/onboarding.md
+  description: Implement add 15-minute quickstart FAQ and common papercuts to docs/ according to section
+    1 of docs/architecture.md.
+- id: m7-02
+  milestone: M7
+  title: 'docs: create triage rotation guidelines for event maintainers'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - docs/triage.md
+  acceptance_test: test -f docs/triage.md
+  description: Implement create triage rotation guidelines for event maintainers according to section
+    18 of docs/architecture.md.
+- id: m7-03
+  milestone: M7
+  title: 'docs: add issue label taxonomy reference guide in CONTRIBUTING.md'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - CONTRIBUTING.md
+  acceptance_test: test -f CONTRIBUTING.md
+  description: Implement add issue label taxonomy reference guide in CONTRIBUTING.md according to section
+    18 of docs/architecture.md.
+- id: m7-04
+  milestone: M7
+  title: 'docs: author dry-run participant feedback questionnaire'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '18'
+  files_to_touch:
+  - docs/event_feedback.md
+  acceptance_test: test -f docs/event_feedback.md
+  description: Implement author dry-run participant feedback questionnaire according to section 18 of
+    docs/architecture.md.
+- id: m7-05
+  milestone: M7
+  title: 'docs: verify root README clean clone flow on clean macOS and Windows systems'
+  labels:
+  - docs
+  - good first issue
+  spec_section: '1'
+  files_to_touch:
+  - README.md
+  acceptance_test: test -f README.md
+  description: Implement verify root README clean clone flow on clean macOS and Windows systems according
+    to section 1 of docs/architecture.md.

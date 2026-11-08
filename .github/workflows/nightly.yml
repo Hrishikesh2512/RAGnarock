@@ -1,0 +1,63 @@
+name: Nightly Compose Smoke Test
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # Run daily at 02:00 UTC
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke-test:
+    name: Compose End-to-End Smoke Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Copy environment file
+        run: cp .env.example .env
+
+      - name: Build and start dev stack
+        run: docker compose up --build -d
+
+      - name: Wait for services to become healthy
+        timeout-minutes: 5
+        run: |
+          echo "Waiting for PostgreSQL..."
+          until docker compose exec -T db pg_isready -U ragnarock -d ragnarock; do
+            sleep 2
+          done
+
+          echo "Waiting for API /health..."
+          until curl -fsS http://localhost:8000/health; do
+            sleep 2
+          done
+          echo ""
+
+      - name: Smoke test health and version endpoints
+        run: |
+          curl -fsS http://localhost:8000/health
+          curl -fsS http://localhost:8000/version
+
+      - name: Smoke test document upload
+        run: |
+          echo "Sample text for ingestion" > sample.txt
+          UPLOAD_RES=$(curl -fsS -X POST http://localhost:8000/api/documents \
+            -F "file=@sample.txt")
+          echo "Upload response: $UPLOAD_RES"
+
+      - name: Smoke test chat completion (Fake Provider)
+        run: |
+          CHAT_RES=$(curl -fsS -X POST http://localhost:8000/api/chat \
+            -H "Content-Type: application/json" \
+            -d '{"question": "What is in the document?"}')
+          echo "Chat response: $CHAT_RES"
+
+      - name: Tear down stack
+        if: always()
+        run: docker compose down -v
+

@@ -1,0 +1,17 @@
+# Default maintainers for the entire repository
+* @NodeDotAI @sodium16
+
+# Backend, database, and RAG pipeline
+/backend/ @NodeDotAI @sodium16
+
+# Frontend React SPA
+/frontend/ @NodeDotAI @sodium16
+
+# Infrastructure, Docker, and Caddy
+/infra/ @NodeDotAI @sodium16
+/docker-compose.yml @NodeDotAI @sodium16
+
+# Documentation and architecture specs
+/docs/ @NodeDotAI @sodium16
+/AGENTS.md @NodeDotAI @sodium16
+

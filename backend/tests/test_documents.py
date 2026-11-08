@@ -21,4 +21,3 @@ def test_normalize_content_type_inferred_from_text_extension() -> None:
 def test_suffix_for() -> None:
     assert _suffix_for("text/markdown") == ".md"
     assert _suffix_for("text/plain") == ".txt"
-
