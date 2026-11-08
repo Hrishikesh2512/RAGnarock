@@ -1,0 +1,91 @@
+# Development stack.
+#
+# Run from the repository root (root docker-compose.yml includes this file):
+#
+#   docker compose up --build
+#
+# Postgres is not published by default. Use the debug profile if a GUI client
+# needs it:  docker compose --profile debug up
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ragnarock
+      POSTGRES_PASSWORD: ragnarock
+      POSTGRES_DB: ragnarock
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ragnarock -d ragnarock"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  # Publishes Postgres on the host loopback only, for GUI clients and native runs.
+  db-debug:
+    image: alpine/socat
+    profiles: ["debug"]
+    command: TCP-LISTEN:5432,fork,reuseaddr TCP:db:5432
+    ports:
+      - "127.0.0.1:5432:5432"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ../backend
+      target: dev
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://ragnarock:ragnarock@db:5432/ragnarock
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_FORMAT: console
+      STORAGE_PATH: /data/uploads
+      HF_HOME: /data/hf-cache
+    volumes:
+      - ../backend:/app
+      - uploads:/data/uploads
+      - hf-cache:/data/hf-cache
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "alembic upgrade head &&
+             uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+  web:
+    build:
+      context: ../frontend
+      target: dev
+    environment:
+      VITE_API_PROXY_TARGET: http://api:8000
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ../frontend:/app
+      - web_node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  uploads:
+  hf-cache:
+  web_node_modules:

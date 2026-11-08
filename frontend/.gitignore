@@ -1,0 +1,17 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Tooling
+.vite/
+coverage/
+playwright-report/
+test-results/
+.eslintcache
+
+# Environment
+.env
+.env.*
+!.env.example
