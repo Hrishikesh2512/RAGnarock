@@ -38,6 +38,9 @@ services:
       HF_HOME: /data/hf-cache
       AUTH_DISABLED: "false"
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
+      LLM_PROVIDER: openrouter
+      EMBEDDING_PROVIDER: local
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:?set ALLOWED_ORIGINS in .env}
     volumes:
       - uploads:/data/uploads
       - hf-cache:/data/hf-cache

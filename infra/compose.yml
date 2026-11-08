@@ -43,6 +43,10 @@ services:
       DATABASE_URL: postgresql+psycopg://ragnarock:ragnarock@db:5432/ragnarock
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       LOG_FORMAT: console
+      AUTH_DISABLED: "true"
+      LLM_PROVIDER: fake
+      EMBEDDING_PROVIDER: local
+      ALLOWED_ORIGINS: ""
       STORAGE_PATH: /data/uploads
       HF_HOME: /data/hf-cache
     volumes:

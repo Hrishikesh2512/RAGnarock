@@ -583,9 +583,14 @@ Base path: `/api`. All endpoints are versioned implicitly by the application rel
 | `GET` | `/documents/{id}/chunks` | JWT | none | Chunk inspector |
 | `POST` | `/documents/{id}/reindex` | JWT | none | Re-run ingestion |
 | `POST` | `/search` | JWT | none | Retrieval-only, no generation |
-| `POST` | `/chat` | JWT | **BYOK** | SSE token stream |
+| `POST` | `/chat` | JWT | **BYOK** | JSON answer + citations |
 | `GET` | `/conversations` | JWT | none | List |
 | `GET` | `/conversations/{id}` | JWT | none | Messages + citations |
+
+v1 implements `health`, `version`, `auth/register`, `auth/login`, `auth/me`, all
+document rows except `reindex`, `search`, and `chat`. `auth/refresh`, workspaces,
+reindex, and conversations are planned; chat returns one JSON response rather
+than an SSE stream in v1.
 
 Notes:
 
@@ -622,7 +627,7 @@ All backend configuration is environment-based, validated at startup by pydantic
 | `STORAGE_BACKEND` | `local` | `local` \| `s3` |
 | `STORAGE_PATH` | `/data/uploads` | Used when `local` |
 | `MAX_UPLOAD_MB` | `10` | Enforced before reading the body |
-| `ALLOWED_MIME_TYPES` | `application/pdf,text/plain,text/markdown,text/html,application/vnd.openxmlformats-officedocument.wordprocessingml.document` | |
+| `ALLOWED_MIME_TYPES` | `text/plain,text/markdown` | |
 
 ### 12.4 Embeddings
 
@@ -637,7 +642,7 @@ All backend configuration is environment-based, validated at startup by pydantic
 
 | Variable | Default | Description |
 |---|---|---|
-| `LLM_PROVIDER` | `openrouter` | `openrouter` \| `ollama` \| `fake` |
+| `LLM_PROVIDER` | `openrouter` | `openrouter` \| `ollama` \| `fake`; dev compose forces `fake`, prod compose forces `openrouter` |
 | `LLM_MODEL` | `openrouter/auto` | |
 | `LLM_TEMPERATURE` | `0.2` | |
 | `OPENROUTER_BASE_URL` | `https://openrouter.ai/api/v1` | |
@@ -673,7 +678,7 @@ All backend configuration is environment-based, validated at startup by pydantic
 
 | Variable | Default | Description |
 |---|---|---|
-| `ALLOWED_ORIGINS` | *(empty)* | Comma-separated exact browser origins allowed to call the API. Production sets the Vercel production origin; preview deployments are visual-only unless their origin is added. Never `*`. |
+| `ALLOWED_ORIGINS` | *(empty)* | Comma-separated exact browser origins allowed to call the API. Required when `APP_ENV=production`; production sets the Vercel production origin, and preview deployments are visual-only unless their origin is added. Never `*`. |
 | `VITE_API_BASE_URL` | `/api` | Frontend build-time API base. `/api` locally (Vite proxy); `https://api.<host>/api` on Vercel. Not read by `Settings`. |
 
 `ALLOWED_ORIGINS` is an allowlist, not an authentication mechanism. A request from an unlisted origin receives no CORS headers; state-changing endpoints also reject a mismatched `Origin`.

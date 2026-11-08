@@ -1,21 +1,23 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router/dom";
 
 import { AppProviders } from "@/app/providers";
 import { router } from "@/app/router";
+import { AuthProvider } from "@/features/auth/auth-provider";
 import "@/index.css";
 
-const rootElement = document.getElementById("root");
-
-if (!rootElement) {
-  throw new Error("Root element #root was not found in index.html");
+const root = document.getElementById("root");
+if (!root) {
+  throw new Error("Root element #root not found");
 }
 
-createRoot(rootElement).render(
+createRoot(root).render(
   <StrictMode>
     <AppProviders>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </AppProviders>
   </StrictMode>,
 );

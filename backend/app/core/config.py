@@ -6,12 +6,10 @@ from typing import Annotated, Literal
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
+# v1 parses text only. PDF and DOCX parsers are a later issue.
 DEFAULT_MIME_TYPES = (
-    "application/pdf",
     "text/plain",
     "text/markdown",
-    "text/html",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 )
 
 
@@ -38,6 +36,9 @@ class Settings(BaseSettings):
 
     # --- database ---
     database_url: str = "postgresql+psycopg://ragnarock:ragnarock@db:5432/ragnarock"
+
+    # --- http ---
+    allowed_origins: Annotated[list[str], NoDecode] = []
 
     # --- storage ---
     storage_backend: Literal["local", "s3"] = "local"
@@ -75,13 +76,13 @@ class Settings(BaseSettings):
     rate_limit_chat_per_min: int = 10
     rate_limit_upload_per_min: int = 3
 
-    @field_validator("allowed_mime_types", mode="before")
+    @field_validator("allowed_mime_types", "allowed_origins", mode="before")
     @classmethod
-    def _split_mime_types(cls, value: object) -> object:
+    def _split_csv(cls, value: object) -> object:
         """Accept the comma-separated form used in ``.env`` files.
 
-        ``NoDecode`` stops pydantic-settings from JSON-decoding the variable, so
-        ``application/pdf,text/plain`` arrives here as a plain string.
+        ``NoDecode`` stops pydantic-settings from JSON-decoding these variables,
+        so ``text/plain,text/markdown`` arrives here as a plain string.
         """
         if isinstance(value, str):
             return [item.strip() for item in value.split(",") if item.strip()]
@@ -93,6 +94,8 @@ class Settings(BaseSettings):
             raise ValueError("JWT_SECRET is required when AUTH_DISABLED=false")
         if self.is_production and self.auth_disabled:
             raise ValueError("AUTH_DISABLED=true is not allowed when APP_ENV=production")
+        if self.is_production and not self.allowed_origins:
+            raise ValueError("ALLOWED_ORIGINS is required when APP_ENV=production")
         return self
 
     @property
