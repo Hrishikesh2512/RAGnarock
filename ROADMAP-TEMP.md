@@ -24,9 +24,9 @@ The scaffold is complete and runs end to end. No product features exist yet.
 | Containers | Dev stack and prod stack both built and smoke-tested |
 | CI/CD | **Nothing.** No workflows, no branch protection, no CODEOWNERS |
 | Contributor docs | **Nothing.** No README, CONTRIBUTING, issue templates, issue manifest |
-| Hosted deploy | **Not done.** No AWS instance, no runbook, no backup job |
+| Hosted deploy | **Not done.** No Vercel project, no AWS instance, no runbook, no backup job |
 
-Verified on 2026-11-08: `pytest` 6 passed, `ruff`/`mypy` clean, `npm run build`
+Verified on 2026-11-08: `pytest` 7 passed, `ruff`/`mypy` clean, `npm run build`
 105.66 kB gzip, dev stack healthy on `:5173`/`:8000`, prod stack healthy on
 `:80`/`:443` with CSP headers and SPA fallback.
 
@@ -144,14 +144,22 @@ now**, not before.
 ### M6 — Hosted deployment (≈10 issues)
 
 - `infra/deploy/aws-ec2.md`: provisioning, security group, Elastic IP, Docker install,
-  compose `prod` profile, TLS, log rotation, upgrade procedure.
+  compose `prod` profile, API-only TLS, log rotation, upgrade procedure.
+- `infra/deploy/vercel.md`: project root `frontend`, build `npm run build`, output
+  `dist`, `VITE_API_BASE_URL`, SPA rewrite, preview deployments, Hobby limits.
+- `frontend/vercel.json`: SPA rewrite + security headers (CSP `connect-src` API origin).
+- API CORS: `ALLOWED_ORIGINS`, preflight for `Authorization` and `X-Provider-Key`,
+  `Vary: Origin`, `Retry-After` exposure; bearer guest sessions (§13.4).
 - Nightly `pg_dump` + upload archive to object storage; restore drill documented.
 - GitHub Actions cron polling `/health` every 6 hours with alerting.
 - ARM64 image verification: CI publishes `linux/arm64`; deploy pulls the same tag.
-- Secrets: `POSTGRES_PASSWORD`, `JWT_SECRET`, `SITE_ADDRESS`; no provider key on the server.
+- Configuration: `ALLOWED_ORIGINS`. Secrets: `POSTGRES_PASSWORD`, `JWT_SECRET`.
+  No provider key on the server.
 - Delete or rotate any temporary demo credentials before launch.
 
-**Exit criteria:** public URL serves the SPA and API same-origin; restore from backup rehearsed.
+**Exit criteria:** the Vercel URL serves the SPA over HTTPS, the API is reachable
+cross-origin from an allowlisted origin, the guest flow works, and a restore from
+backup is rehearsed.
 
 ### M7 — Contributor launch (≈5 issues)
 
@@ -193,9 +201,11 @@ Suggested split: M0 15, M1 30, M2 20, M3 20, M4 20, M5 30, M6 10, M7 5.
 | ARM64 surprises | CI builds both platforms; hosted runs the published arm64 image |
 | Demo abuse | Guest TTL, per-session rate limits, no server key |
 | Windows contributors | `CHOKIDAR_USEPOLLING`, named `node_modules` volume, no symlinks |
+| Vercel Hobby is non-commercial and can suspend projects | Keep the Caddy same-origin fallback; the static build is portable; move to a paid plan only if the demo is commercialized |
 
 Open questions (from §19): guest vs email signup (Q1), rate-limited demo key (Q2),
-default demo model (Q3), CDN (Q4), backup retention (Q5). Decide before M6.
+default demo model (Q3), backup retention (Q5). Decide before M6. Q4 (CDN) is
+closed by D13.
 
 ---
 

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Status** | Accepted |
-| **Version** | 1.1 |
+| **Version** | 1.2 |
 | **Date** | 2026-11-08 |
 | **Maintainers** | NodeDotAI |
 | **License** | MIT |
@@ -45,7 +45,7 @@ The project serves two audiences simultaneously:
 - **Learners.** Junior developers who should be able to understand and contribute to a real RAG implementation without wading through a framework.
 - **Users.** Anyone who wants to upload their own documents and ask questions about them, either locally or through a public demo.
 
-This document describes the architecture that both audiences run. There is **one codebase and one compose file**; local development and the hosted demo differ only in configuration.
+This document describes the architecture that both audiences run. There is **one codebase** and one compose file for the API stack; local development and the hosted demo differ only in configuration and in where the SPA is served (§5.2).
 
 ---
 
@@ -57,9 +57,9 @@ This document describes the architecture that both audiences run. There is **one
 |---|---|
 | G1 | Clone-to-running in under 10 minutes with a single command. |
 | G2 | A complete RAG pipeline — parse, chunk, embed, store, retrieve, generate with citations — implemented in readable application code. |
-| G3 | 150+ contributors can work in parallel with minimal merge conflicts. |
+| G3 | 150+ contributors can work in parallel on 150+ atomic issues with minimal merge conflicts. |
 | G4 | Green CI with **zero repository secrets** for contributors and fork PRs. |
-| G5 | The full stack runs online on a single commodity VM, functionally, not as a static mock. |
+| G5 | The full stack runs online — SPA on a static host, API and database on a single commodity VM — functionally, not as a static mock. |
 | G6 | No vendor lock-in: every external dependency sits behind an interface. |
 | G7 | User credentials are never persisted by the server. |
 
@@ -83,7 +83,7 @@ This document describes the architecture that both audiences run. There is **one
 3. **Credentials flow inward, never outward.** Model keys are supplied per request and discarded. Nothing is written to logs, the database, or error trackers.
 4. **Interfaces at every boundary.** `VectorStore`, `StorageBackend`, `EmbeddingProvider`, `LLMProvider`, `Parser`, `Chunker`. Swapping an implementation is a configuration change.
 5. **Keyless by default.** The application is useful before the user supplies any credential.
-6. **One artifact, two environments.** Local and production use the same image and the same compose file.
+6. **One artifact, two environments.** Local and production use the same API images and the same compose file. The SPA is the single exception: Vite builds it locally, Vercel builds it for the hosted demo.
 7. **Small files, single responsibility.** One route module, parser, or component per file — this is what makes atomic issue decomposition possible.
 
 ---
@@ -95,7 +95,7 @@ flowchart LR
     user["User<br/>(browser)"]
     ui["React SPA"]
     api["FastAPI service"]
-    db[("PostgreSQL 16<br/>+ pgvector")]
+    db[("PostgreSQL 17<br/>+ pgvector")]
     fs[("Local volume<br/>uploads")]
     llm["LLM provider<br/>OpenRouter / Ollama"]
     emb["Embedding model<br/>bge-small (local CPU)"]
@@ -119,9 +119,9 @@ RAGnarock supports exactly two environments:
 | Environment | Orchestration | Runs on | Purpose |
 |---|---|---|---|
 | **Local** | Docker Compose | Each contributor's machine | Development, testing, personal use |
-| **Hosted** | Docker Compose (`prod` profile) | A single AWS EC2 instance | The public demo linked from the README |
+| **Hosted** | Vercel (SPA) + Docker Compose (`prod` profile) | Vercel's edge, plus a single AWS EC2 instance for the API | The public demo linked from the README |
 
-Both use the same image and the same compose file; only configuration differs. Provider-specific runbooks live in `infra/deploy/`; provisioning, credentials, and operational procedure are deliberately out of scope for this document.
+The API, database, and reverse proxy use the same images and compose file in both environments; only configuration differs. The SPA is the one deliberate exception: development serves it from the Vite dev server, the hosted demo serves it from Vercel (D13). Provider-specific runbooks live in `infra/deploy/`; provisioning, credentials, and operational procedure are deliberately out of scope for this document.
 
 ### 5.1 Local development (primary)
 
@@ -133,10 +133,9 @@ Every contributor runs the entire stack on their own machine. There is no shared
 │  docker compose up                                               │
 │  ├── web        (node)      :5173  ── HMR                        │
 │  ├── api        (python)    :8000                                │
-│  ├── db         (postgres)  :5432  [internal only]               │
-│  └── ollama     (optional profile) :11434                        │
+│  └── db         (postgres)  :5432  [internal only]               │
 │                                                                  │
-│  named volumes: rag_rock_pgdata, rag_rock_uploads                │
+│  named volumes: ragnarock_pgdata, ragnarock_uploads              │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -149,41 +148,60 @@ Characteristics:
 
 ### 5.2 Reference deployment (hosted demo)
 
-The hosted site runs the same compose file with the `prod` profile on a single AWS EC2 instance.
+The SPA is served by Vercel; the API, database, and edge proxy run the `prod` compose profile on a single AWS EC2 instance (D13).
 
 ```
 Internet
    │
-   ▼
-Cloudflare DNS  ──►  EC2 Elastic IP (or Cloudflare Tunnel)
-   │
-   ▼
-Caddy  (automatic TLS, same-origin reverse proxy)
-   ├── /            → static React build
-   ├── /api/*       → api:8000
-   └── /health      → api:8000/health
-   │
-   ├── api        (python, keyless embeddings)
-   ├── db         (postgres + pgvector, persistent volume)
-   └── uploads    (persistent volume, nightly pg_dump + archive)
+   ├──►  <app>.vercel.app            Vercel: static React build, CDN, previews
+   │        │
+   │        │  fetch + SSE, cross-origin, X-Provider-Key
+   │        ▼
+   └──►  api.<host>  ──►  EC2 Elastic IP
+                             │
+                             ▼
+                        Caddy (automatic TLS, API only)
+                            ├── /api/*    → api:8000
+                            ├── /health   → api:8000/health
+                            └── /version  → api:8000/version
+                             │
+                             ├── api     (python, keyless embeddings)
+                             ├── db      (postgres + pgvector, persistent volume)
+                             └── uploads (persistent volume, nightly pg_dump + archive)
 ```
 
 | Property | Value |
 |---|---|
-| Compute | AWS EC2 `t4g.medium` — Graviton (ARM64), 2 vCPU / 4 GB |
-| Architecture | `linux/arm64` |
+| Compute | AWS EC2 `t4g.medium` — Graviton (ARM64), 2 vCPU / 4 GB; the **only deployer-funded resource** |
+| Architecture | `linux/arm64` for the API images; the SPA is built by Vercel |
 | Storage | 30 GB gp3 root volume; persistent volumes for Postgres data and uploads |
-| HTTPS | Caddy automatic certificates |
-| Origin policy | Same-origin. No CORS configuration is required. |
+| HTTPS | Caddy automatic certificates on the API host; Vercel-managed certificates on the SPA host |
+| Frontend delivery | Vercel builds `frontend/` on every push: a production URL, immutable asset URLs, and a preview deployment per pull request. `frontend/vercel.json` rewrites every path to `/index.html` so client-side deep links work. |
+| Vercel plan | Hobby — free, non-commercial use only. Includes 100 GB fast data transfer, 1,000,000 CDN requests, and 100 deployments per day; preview deployments count toward the daily deployment allowance. |
+| Build settings | Root directory `frontend`, build command `npm run build`, output directory `dist`, and the Node version declared in `frontend/package.json` (`>=22`). |
+| Origin policy | Cross-origin. The API accepts only the exact origins in `ALLOWED_ORIGINS`; a wildcard is never valid, and CORS is not an authorization boundary. |
+| Session transport | Bearer tokens in the `Authorization` header; the hosted demo does not use third-party cookies (§13.4). |
 | Availability monitoring | GitHub Actions cron polls `/health` every 6 hours |
 | Durability | Nightly `pg_dump` + upload archive to object storage |
-| Runbook | `infra/deploy/aws-ec2.md` |
+| Runbooks | `infra/deploy/aws-ec2.md`, `infra/deploy/vercel.md` |
 
-Graviton is ARM64, so the hosted instance consumes the same `linux/arm64` images CI publishes. There is no separate build path for the public demo.
+Graviton is ARM64, so the hosted API consumes the same `linux/arm64` images CI publishes. The SPA has its own build path (Vercel), which is the deliberate exception to §3 principle 6.
 
-**Why a single VM rather than a serverless platform.** Serving the SPA and the API from one origin eliminates CORS and cross-site cookie handling. Self-hosting Postgres removes the need for a second managed dependency. Most importantly, the deployment is the *same* compose file contributors run, so there is no second runtime shape to maintain and no class of "works locally, broken in prod" defects.
+**Why the API stays on one VM.** Self-hosting Postgres removes a second managed dependency, and the API deployment is the *same* compose file contributors run, so the backend has no second runtime shape to maintain. The SPA does not need that parity: static assets belong on a CDN, and Vercel provides the free `<app>.vercel.app` URL plus a preview deployment per pull request. Serverless is still ruled out for the API specifically: no persistent disk for uploads, `BackgroundTasks` die with the response (§6.3), and the image exceeds practical bundle limits.
 
-### 5.3 Alternative: managed backend
+**Why the browser calls the API directly.** Vercel can proxy `/api/*` with an external rewrite, but streaming Server-Sent Events through a CDN proxy is not guaranteed to stay incremental, and it adds a second failure domain between the user and the token stream. The SPA therefore calls the API origin directly and CORS is mandatory.
+
+**The price is CORS.** Every cross-origin call needs an exact allowlist on the API, a preflight that permits `Authorization`, `Content-Type`, and `X-Provider-Key`, `Vary: Origin` on cacheable responses, and `Retry-After` exposure so §14 rate-limit messaging survives. CORS is not authentication: every endpoint still verifies the bearer token, and mutations additionally check `Origin` (§13.5). None of this is optional once the SPA leaves the origin.
+
+**Free-tier budget.** The reference demo is designed to run without paid managed services:
+
+- **SPA:** Vercel Hobby, free for personal, non-commercial projects. It includes enough bandwidth and requests for a demo, but it is a fair-use offer: Vercel may pause or remove a Hobby deployment, and a commercial deployment requires a paid plan. The static build is portable to any static host, which is the exit path if Hobby is no longer suitable.
+- **API, database, uploads:** one EC2 Graviton instance. It is the only billable component; there is no managed database, cache, queue, or observability service. AWS includes 100 GB of data transfer out per month, far above demo traffic.
+- **TLS and CI:** Let's Encrypt certificates via Caddy, GitHub Actions for public repositories, and GHCR for public images are free.
+
+No prices, credits, or billing details are committed: hosting economics belong to deployers, per `AGENTS.md` invariant 10.
+
+### 5.3 Alternative: managed platform
 
 If a single VM is unsuitable, the stack maps onto a managed platform without application changes:
 
@@ -192,7 +210,7 @@ If a single VM is unsuitable, the stack maps onto a managed platform without app
 | Compute | AWS EC2 + compose | Managed container platform (e.g. Cloud Run, ECS Fargate) |
 | Database | Self-hosted Postgres | Managed PostgreSQL with pgvector (e.g. Neon, RDS) |
 | Storage | Local volume | S3-compatible object storage |
-| Frontend | Caddy, same origin | Static host (e.g. Cloudflare Pages) with CORS enabled |
+| Frontend | Vercel static SPA + CDN | Caddy same-origin build (no CORS) |
 
 This path is supported by the interfaces in §9 and requires no application code changes.
 
@@ -212,6 +230,7 @@ This path is supported by the interfaces in §9 and requires no application code
 | Streaming | `fetch` + `ReadableStream` over Server-Sent Events |
 | Component tests | Vitest + Testing Library |
 | End-to-end | Playwright |
+| Hosting | Static build on Vercel; API origin from `VITE_API_BASE_URL` at build time |
 
 The generated client is a hard requirement: it allows frontend and backend contributors to work in parallel without coordinating on request shapes.
 
@@ -573,12 +592,13 @@ Notes:
 - `POST /search` returns ranked chunks and scores without generation. It powers the retrieval inspector, works without a key, and is the primary tool for debugging retrieval quality.
 - `POST /chat` returns `401` with an explicit `provider_key_required` error code when no key is supplied, and the frontend renders guidance rather than a generic failure.
 - Errors follow a single envelope: `{ "error": { "code": str, "message": str, "details": object | null } }`.
+- The hosted SPA is cross-origin. API responses carry CORS headers only for an allowlisted origin; `OPTIONS` preflight permits `Authorization`, `Content-Type`, and `X-Provider-Key`; `Retry-After` is exposed. CORS never substitutes for token validation.
 
 ---
 
 ## 12. Configuration reference
 
-All configuration is environment-based, validated at startup by pydantic-settings, and documented in `.env.example`. Invalid configuration fails fast with an actionable message.
+All backend configuration is environment-based, validated at startup by pydantic-settings, and documented in `.env.example`; frontend build-time variables are supplied by the hosting project. Invalid configuration fails fast with an actionable message.
 
 ### 12.1 Core
 
@@ -649,6 +669,15 @@ All configuration is environment-based, validated at startup by pydantic-setting
 | `RATE_LIMIT_CHAT_PER_MIN` | `10` | Per session |
 | `RATE_LIMIT_UPLOAD_PER_MIN` | `3` | Per session |
 
+### 12.9 Hosted SPA and CORS
+
+| Variable | Default | Description |
+|---|---|---|
+| `ALLOWED_ORIGINS` | *(empty)* | Comma-separated exact browser origins allowed to call the API. Production sets the Vercel production origin; preview deployments are visual-only unless their origin is added. Never `*`. |
+| `VITE_API_BASE_URL` | `/api` | Frontend build-time API base. `/api` locally (Vite proxy); `https://api.<host>/api` on Vercel. Not read by `Settings`. |
+
+`ALLOWED_ORIGINS` is an allowlist, not an authentication mechanism. A request from an unlisted origin receives no CORS headers; state-changing endpoints also reject a mismatched `Origin`.
+
 ---
 
 ## 13. Security architecture
@@ -678,14 +707,18 @@ All configuration is environment-based, validated at startup by pydantic-setting
 
 ### 13.4 Guest sessions (public demo)
 
-- First visit issues an httpOnly, `SameSite=Lax`, `Secure` session cookie (same-origin, so no cross-site configuration is needed).
+- Local same-origin runs may use an httpOnly, `SameSite=Lax`, `Secure` session cookie.
+- The hosted demo is **cross-site**: `<app>.vercel.app` and the API host are different registrable domains, and Safari's ITP and Firefox's Total Cookie Protection block third-party cookies even with `SameSite=None`. Hosted guest sessions therefore use a signed bearer token returned by the API and held in `sessionStorage`; requests carry it in the `Authorization` header. The provider key is never persisted.
 - A synthetic `users` row with `kind='guest'` and one workspace is created per session.
 - Nightly job purges guest users, and cascades remove documents, chunks, and uploads.
 - The UI states plainly that uploads are stored on the demo server and deleted after 7 days.
 
+Hosted sessions are bearer-token based regardless of domain layout; cookie sessions are reserved for local same-origin runs.
+
 ### 13.5 Application
 
-- CSP, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, HSTS.
+- CSP, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, HSTS. Caddy sets them on API responses; Vercel sets the SPA's headers in `frontend/vercel.json`, where `connect-src` names the API origin.
+- Mutating endpoints reject requests whose `Origin` is not in `ALLOWED_ORIGINS`, in addition to token validation.
 - Server-side rate limits on chat and upload per session, in addition to any edge limiting.
 - Dependency and container scanning in CI.
 - Branch protection with required checks; no direct pushes to `main`.
@@ -707,6 +740,8 @@ All configuration is environment-based, validated at startup by pydantic-setting
 | Parse timeout | Job fails, partial chunks removed | Document shows `failed` with reason |
 | Provider slow / stream stalls | Idle timeout, SSE closed | Partial answer retained, marked incomplete |
 | Guest TTL expired | Session recreated empty | No data loss for the user; demo resets |
+| Request from an origin not in `ALLOWED_ORIGINS` | No CORS headers; mutations rejected | Browser blocks the call; server logs the origin |
+| Guest token missing or invalid | New guest session issued | Demo resets to an empty workspace |
 
 **Principle:** degraded behaviour is always *legible*. No endpoint returns a bare 500 when a specific, actionable error exists.
 
@@ -817,12 +852,13 @@ ragnarock/
 │   │   └── pages/
 │   ├── tests/
 │   ├── Dockerfile
+│   ├── vercel.json        SPA rewrite + security headers
 │   └── package.json
 ├── infra/
 │   ├── compose.yml         # base: db, api, web
-│   ├── compose.prod.yml    # prod profile: + caddy
+│   ├── compose.prod.yml    # prod profile: db, api, caddy (API-only edge)
 │   ├── Caddyfile
-│   └── deploy/             aws-ec2.md, cloud-run.md
+│   └── deploy/             aws-ec2.md, vercel.md
 ├── planning/
 │   └── issues.yml          # issue manifest → scripts/publish_issues.py
 ├── scripts/                publish_issues.py, seed.py, backup.sh
@@ -849,12 +885,13 @@ The layout is deliberately flat rather than a monorepo workspace. Two applicatio
 | D4 | BYOK for generation only | Server-held key; server-side encrypted key storage | No key liability; no shared credential to abuse; aligns with open-source norms | First-time demo visitor cannot generate without a key |
 | D5 | Synchronous SQLAlchemy | Async SQLAlchemy | Fewer concurrency bugs for contributors | Blocking work must be threaded explicitly |
 | D6 | `BackgroundTasks` for ingestion | Celery, Arq, Dramatiq | No broker, no extra container | Not durable; documented; `JobQueue` interface reserved |
-| D7 | Single AWS EC2 Graviton VM reference deployment | Managed container platform + managed Postgres | Dev/prod parity, same-origin, no CORS, one compose file, same ARM64 images as CI | Single point of failure; manual ops |
-| D8 | Frontend served same-origin by Caddy | Vercel/Cloudflare Pages | No CORS, no cross-site cookies, one TLS setup | No CDN; frontend rebuild deploys with the stack |
+| D7 | Single AWS EC2 Graviton VM for the API and database | Managed container platform + managed Postgres | Dev/prod parity, one compose file, same ARM64 images as CI, one billable resource | Single point of failure; manual ops; the SPA is hosted separately (D13) |
+| D8 | Frontend served same-origin by Caddy *(superseded by D13)* | Vercel / Cloudflare Pages | No CORS, no cross-site cookies, one TLS setup | No CDN; frontend rebuild deploys with the stack. Caddy remains the local and fallback SPA host. |
 | D9 | Generated TypeScript client from OpenAPI | Hand-written client | Frontend and backend PRs never block each other | Requires schema stability in CI |
 | D10 | No LangChain / LlamaIndex | Framework orchestration | The pipeline is the teaching material; stable dependencies | More code to own (~300 lines) |
 | D11 | Fake providers as production code | Test-only mocks | Zero-secret CI; 150 contributors without credentials | Fake implementations must track real interfaces |
 | D12 | Atomic issue decomposition with pre-written skipped tests | Contributors write tests and implementations | Tests become the specification; PRs are reviewable | ~40 hours of maintainer scaffolding per 150 issues |
+| D13 | Vercel Hobby hosts the SPA; the API and database stay on the EC2 VM | Caddy same-origin (D8); Cloudflare Pages; serverless API | Free CDN, per-PR previews, and no API runtime split; the static build is the only second build path | Cross-origin CORS and preflight; bearer guest sessions instead of third-party cookies; Hobby is non-commercial and may be suspended; `frontend/vercel.json` SPA rewrite required |
 
 ---
 
@@ -862,7 +899,7 @@ The layout is deliberately flat rather than a monorepo workspace. Two applicatio
 
 ### v0.1 — Walking skeleton
 
-Document upload (PDF, DOCX, Markdown, text, HTML), ingestion with status, pgvector retrieval, streamed answers with citations, retrieval inspector, local auth, compose, CI, reference deployment.
+Document upload (PDF, DOCX, Markdown, text, HTML), ingestion with status, pgvector retrieval, streamed answers with citations, retrieval inspector, local auth, compose, CI, reference deployment. This walking skeleton is the baseline for the 150+ launch-event issues; nothing in v0.2+ is required for the event.
 
 ### v0.2 — Retrieval quality
 
@@ -885,8 +922,9 @@ Durable job queue, S3 storage backend, tracing backend, multi-workspace sharing.
 | Q1 | Does the public demo issue guest sessions or require email signup? | Maintainers | §13.4 |
 | Q2 | Should a strictly rate-limited server key be offered for first-touch demos? | Maintainers | §10.2 |
 | Q3 | Which default LLM model is used for the demo? | Maintainers | §12.5 |
-| Q4 | Is a CDN worth adding for the SPA, or is same-origin sufficient? | Maintainers | §5.2 |
 | Q5 | Backup retention window and restore-drill cadence | Maintainers | §5.2 |
+
+Q4 (CDN vs. same-origin) is closed by D13: the hosted SPA is served from Vercel's CDN.
 
 ---
 
