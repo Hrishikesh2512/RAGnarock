@@ -20,3 +20,14 @@ def test_development_defaults_are_valid() -> None:
     assert settings.app_env == "development"
     assert settings.auth_disabled is True
     assert settings.embedding_dim == 384
+    assert "application/pdf" in settings.allowed_mime_types
+
+
+def test_allowed_mime_types_accepts_a_comma_separated_string(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("ALLOWED_MIME_TYPES", "application/pdf, text/plain ,")
+
+    settings = Settings()
+
+    assert settings.allowed_mime_types == ["application/pdf", "text/plain"]

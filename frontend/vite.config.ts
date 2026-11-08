@@ -17,7 +17,16 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
+      // Mirror infra/Caddyfile so root-level probes behave the same in dev.
       "/api": {
+        target: apiProxyTarget,
+        changeOrigin: true,
+      },
+      "/health": {
+        target: apiProxyTarget,
+        changeOrigin: true,
+      },
+      "/version": {
         target: apiProxyTarget,
         changeOrigin: true,
       },
@@ -26,5 +35,6 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
+    setupFiles: ["./src/test/setup.ts"],
   },
 });

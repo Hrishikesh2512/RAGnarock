@@ -3,7 +3,7 @@
 from functools import lru_cache
 from typing import Annotated, Literal
 
-from pydantic import model_validator
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 DEFAULT_MIME_TYPES = (
@@ -74,6 +74,18 @@ class Settings(BaseSettings):
     # --- rate limiting ---
     rate_limit_chat_per_min: int = 10
     rate_limit_upload_per_min: int = 3
+
+    @field_validator("allowed_mime_types", mode="before")
+    @classmethod
+    def _split_mime_types(cls, value: object) -> object:
+        """Accept the comma-separated form used in ``.env`` files.
+
+        ``NoDecode`` stops pydantic-settings from JSON-decoding the variable, so
+        ``application/pdf,text/plain`` arrives here as a plain string.
+        """
+        if isinstance(value, str):
+            return [item.strip() for item in value.split(",") if item.strip()]
+        return value
 
     @model_validator(mode="after")
     def _validate_auth(self) -> "Settings":
