@@ -19,6 +19,19 @@ from app.storage.local import get_storage
 router = APIRouter()
 
 
+def _normalize_content_type(raw_type: str | None, filename: str | None) -> str:
+    content_type = (raw_type or "").split(";")[0].strip().lower()
+    name = (filename or "").lower()
+
+    if content_type in {"", "application/octet-stream", "text/x-markdown"}:
+        if name.endswith((".md", ".markdown")):
+            return "text/markdown"
+        if name.endswith(".txt"):
+            return "text/plain"
+
+    return content_type
+
+
 def _suffix_for(content_type: str) -> str:
     return ".md" if content_type == "text/markdown" else ".txt"
 
@@ -31,7 +44,7 @@ def upload_document(
     user: Annotated[User, Depends(get_current_user)],
 ) -> Document:
     settings = get_settings()
-    content_type = (file.content_type or "").split(";")[0].strip().lower()
+    content_type = _normalize_content_type(file.content_type, file.filename)
     if content_type not in settings.allowed_mime_types:
         raise ApiError(
             415,

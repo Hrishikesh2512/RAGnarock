@@ -85,7 +85,17 @@ export const api = {
   listDocuments: () => request<DocumentItem[]>("/documents"),
   uploadDocument: (file: File) => {
     const form = new FormData();
-    form.append("file", file);
+    const contentType =
+      file.type && file.type !== "application/octet-stream"
+        ? file.type
+        : file.name.endsWith(".md") || file.name.endsWith(".markdown")
+          ? "text/markdown"
+          : "text/plain";
+    const uploadFile =
+      file.type === contentType
+        ? file
+        : new File([file], file.name, { type: contentType });
+    form.append("file", uploadFile);
     return request<DocumentItem>("/documents", { method: "POST", body: form });
   },
   deleteDocument: (id: string) =>
