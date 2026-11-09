@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Event guide
+    url: https://github.com/bit-nodedotai/RAGnarok/blob/main/docs/event-guide.md
+    about: Git Together setup, GitHub workflow, issue guide, and troubleshooting.
+  - name: No-code track
+    url: https://github.com/bit-nodedotai/RAGnarok/blob/main/docs/event-no-code-track.md
+    about: 19 Git Together issues that need no programming.

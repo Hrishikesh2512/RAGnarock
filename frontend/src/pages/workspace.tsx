@@ -23,7 +23,7 @@ export function WorkspacePage() {
       <header className="border-b border-slate-800">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">RAGnarock</h1>
+            <h1 className="text-xl font-semibold tracking-tight">RAGnarok</h1>
             <p className="text-xs text-slate-500">
               Upload → chunk → embed → retrieve → answer
             </p>

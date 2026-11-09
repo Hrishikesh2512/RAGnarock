@@ -4,7 +4,7 @@
 #
 # The actual development stack lives in infra/compose.yml. Relative paths in
 # that file resolve against infra/, so both forms work.
-name: ragnarock
+name: ragnarok
 
 include:
   - infra/compose.yml

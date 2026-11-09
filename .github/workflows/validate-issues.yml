@@ -1,0 +1,60 @@
+name: Validate Event Issues
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "planning/**"
+      - "scripts/**"
+      - "docs/event-*.md"
+      - "docs/event-templates/**"
+      - ".github/workflows/validate-issues.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "planning/**"
+      - "scripts/**"
+      - "docs/event-*.md"
+      - "docs/event-templates/**"
+      - ".github/workflows/validate-issues.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate manifest and index
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyYAML
+        run: python3 -m pip install --upgrade pyyaml
+
+      - name: Validate the issue manifest
+        run: python3 scripts/validate_issues.py --strict
+
+      - name: Check the publisher dry-run
+        run: python3 scripts/publish_issues.py --dry-run --limit 5
+
+      - name: Regenerate the issue index
+        run: python3 scripts/render_issue_index.py
+
+      - name: Fail if the generated index is stale
+        run: |
+          if ! git diff --quiet -- docs/event-issue-index.md; then
+            echo "::error::docs/event-issue-index.md is stale. Run 'python3 scripts/render_issue_index.py' and commit the result."
+            git diff -- docs/event-issue-index.md
+            exit 1
+          fi

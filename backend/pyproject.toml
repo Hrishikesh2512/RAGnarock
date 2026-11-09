@@ -1,7 +1,7 @@
 [project]
-name = "ragnarock-api"
+name = "ragnarok-api"
 version = "0.1.0"
-description = "RAGnarock backend — FastAPI service and RAG pipeline"
+description = "RAGnarok backend — FastAPI service and RAG pipeline"
 requires-python = ">=3.12,<3.13"
 license = { text = "MIT" }
 authors = [{ name = "NodeDotAI" }]

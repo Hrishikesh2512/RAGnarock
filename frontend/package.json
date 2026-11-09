@@ -1,9 +1,9 @@
 {
-  "name": "ragnarock-web",
+  "name": "ragnarok-web",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "RAGnarock web client",
+  "description": "RAGnarok web client",
   "license": "MIT",
   "engines": {
     "node": ">=22"

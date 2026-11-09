@@ -8,7 +8,7 @@
 
 The hosted demo needs a public URL while keeping the API deployable with the same
 compose file contributors run. Serving the SPA and API from Caddy on one VM is
-simple but has no CDN and no per-pull-request preview. The launch event also
+simple but has no CDN and no per-pull-request preview. Git Together also
 needs a zero-cost hosting story: every component except the AWS instance must
 stay on a free tier.
 
@@ -64,6 +64,6 @@ function bundle limits.
   `vercel.json` rewrite is the documented fix for SPA deep links.
 - Hobby includes 100 GB fast data transfer and 1,000,000 CDN requests per month,
   well above demo traffic for a ~350 KB bundle.
-- Hobby permits 100 deployments per day, enough for a launch event.
+- Hobby permits 100 deployments per day, enough for Git Together.
 - The API build is already `linux/arm64`-compatible; Vercel only receives static
   assets.

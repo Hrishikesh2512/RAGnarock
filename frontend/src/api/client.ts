@@ -7,7 +7,7 @@ import type {
 } from "@/api/types";
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? "/api").replace(/\/$/, "");
-const TOKEN_KEY = "ragnarock.access_token";
+const TOKEN_KEY = "ragnarok.access_token";
 
 export class ApiError extends Error {
   status: number;

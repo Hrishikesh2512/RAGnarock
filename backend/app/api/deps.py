@@ -14,7 +14,7 @@ from app.core.security import decode_access_token
 from app.db.models import User
 from app.db.session import get_db
 
-LOCAL_USER_EMAIL = "local@ragnarock.local"
+LOCAL_USER_EMAIL = "local@ragnarok.local"
 
 
 def _local_user(db: Session) -> User:

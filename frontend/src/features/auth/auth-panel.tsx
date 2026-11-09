@@ -35,7 +35,7 @@ export function AuthPanel() {
     <main className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-slate-100">
       <section className="w-full max-w-sm space-y-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-8 shadow-xl">
         <div className="space-y-1">
-          <h1 className="text-3xl font-semibold tracking-tight">RAGnarock</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">RAGnarok</h1>
           <p className="text-sm text-slate-400">
             {mode === "login" ? "Sign in to your workspace." : "Create an account."}
           </p>

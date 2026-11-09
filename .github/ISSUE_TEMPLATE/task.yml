@@ -1,0 +1,102 @@
+name: Event Task
+description: Create a self-contained contributor task for Git Together
+title: "[Task]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for a new Git Together task. Every task is contributor
+        work: one pull request, one runnable acceptance command, no production
+        operations. Read the
+        [issue guide](https://github.com/bit-nodedotai/RAGnarok/blob/main/docs/event-issue-guide.md)
+        first.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should the contributor build or document, and why?
+      placeholder: Add a small helper that...
+    validations:
+      required: true
+  - type: dropdown
+    id: set
+    attributes:
+      label: Event set
+      options:
+        - Set 1 — Starter
+        - Set 2 — Backend
+        - Set 3 — Frontend & Design
+    validations:
+      required: true
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty
+      options:
+        - beginner
+        - intermediate
+        - advanced
+    validations:
+      required: true
+  - type: input
+    id: time
+    attributes:
+      label: Estimated time
+      description: Include reading time and running the acceptance command.
+      placeholder: 45 min
+    validations:
+      required: true
+  - type: checkboxes
+    id: track
+    attributes:
+      label: Track
+      options:
+        - label: This task requires no programming (docs, config, or design only).
+          required: false
+  - type: textarea
+    id: files
+    attributes:
+      label: Files to touch
+      description: Repository-root-relative paths, one per line. Mark new files.
+      placeholder: |
+        - frontend/src/components/ui/button.tsx (new)
+        - frontend/src/components/ui/button.test.tsx (new)
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      description: Ordered, self-contained steps for someone who has never seen the repo.
+      placeholder: |
+        1. Read `frontend/src/features/documents/status-badge.tsx`.
+        2. Create ...
+        3. Add tests ...
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance test
+      description: One command, run from the repository root.
+      placeholder: cd frontend && npx vitest run src/components/ui/button.test.tsx
+      render: bash
+    validations:
+      required: true
+  - type: input
+    id: depends
+    attributes:
+      label: Depends on
+      description: Issue numbers or task IDs that must merge first, if any.
+      placeholder: "#123, set2-14"
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      description: What must be true before the PR can merge?
+      value: |
+        - The acceptance command passes locally.
+        - The change is limited to the listed files.
+        - The PR links this issue with `Closes #<number>`.
+    validations:
+      required: true

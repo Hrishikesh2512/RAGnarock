@@ -14,3 +14,10 @@ Thumbs.db
 .vscode/
 ROADMAP-TEMP.md
 DEPLOY-TEMP.md
+
+# Python tooling (repository-level scripts)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

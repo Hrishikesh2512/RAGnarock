@@ -12,13 +12,13 @@ services:
     image: pgvector/pgvector:pg17
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ragnarock
-      POSTGRES_PASSWORD: ragnarock
-      POSTGRES_DB: ragnarock
+      POSTGRES_USER: ragnarok
+      POSTGRES_PASSWORD: ragnarok
+      POSTGRES_DB: ragnarok
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ragnarock -d ragnarock"]
+      test: ["CMD-SHELL", "pg_isready -U ragnarok -d ragnarok"]
       interval: 5s
       timeout: 5s
       retries: 12
@@ -40,7 +40,7 @@ services:
       target: dev
     environment:
       APP_ENV: development
-      DATABASE_URL: postgresql+psycopg://ragnarock:ragnarock@db:5432/ragnarock
+      DATABASE_URL: postgresql+psycopg://ragnarok:ragnarok@db:5432/ragnarok
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       LOG_FORMAT: console
       AUTH_DISABLED: "true"
