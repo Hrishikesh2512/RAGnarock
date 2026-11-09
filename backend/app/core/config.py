@@ -28,14 +28,14 @@ class Settings(BaseSettings):
     )
 
     # --- core ---
-    app_name: str = "RAGnarock"
+    app_name: str = "RAGnarok"
     app_env: Literal["development", "production", "test"] = "development"
     api_base_url: str = "http://localhost:8000"
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
     log_format: Literal["console", "json"] = "console"
 
     # --- database ---
-    database_url: str = "postgresql+psycopg://ragnarock:ragnarock@db:5432/ragnarock"
+    database_url: str = "postgresql+psycopg://ragnarok:ragnarok@db:5432/ragnarok"
 
     # --- http ---
     allowed_origins: Annotated[list[str], NoDecode] = []

@@ -18,7 +18,7 @@ def test_version_reports_build_information() -> None:
 
     assert response.status_code == 200
     body = response.json()
-    assert body["name"] == "RAGnarock"
+    assert body["name"] == "RAGnarok"
     assert body["version"] == __version__
     assert body["environment"] == "development"
 

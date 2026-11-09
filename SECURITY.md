@@ -1,6 +1,6 @@
 # Security Policy
 
-The RAGnarock team takes the security of our application, our users, and our contributors seriously. This document outlines our supported versions, security model, and reporting process.
+The RAGnarok team takes the security of our application, our users, and our contributors seriously. This document outlines our supported versions, security model, and reporting process.
 
 ---
 
@@ -17,7 +17,7 @@ We provide security patches and updates for the following versions:
 
 ## Security Model & Privacy Guarantees
 
-RAGnarock is designed around a strict zero-trust credential architecture:
+RAGnarok is designed around a strict zero-trust credential architecture:
 
 1. **BYOK (Bring Your Own Key):**
    * LLM API keys (e.g. OpenRouter) are **never** stored in the database, configuration files, environment variables, or disk volumes.
@@ -33,12 +33,14 @@ RAGnarock is designed around a strict zero-trust credential architecture:
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in RAGnarock, **please do NOT open a public GitHub issue**. Public issues disclose vulnerabilities before a fix can be prepared and released.
+If you discover a security vulnerability in RAGnarok, **do not open a public GitHub issue**. Public issues disclose the problem before a fix exists.
+
+Git Together contributors: tell a mentor in person. Do not put exploit detail in an event issue or pull request.
 
 ### Reporting Process
 
 1. **Email or Private Advisory:**
-   * Send a report to the maintainers at `security@nodedotai.org` (or submit a private vulnerability report via [GitHub Security Advisories](https://github.com/bit-nodedotai/RAGnarock/security/advisories/new)).
+   * Send a report to the maintainers at `security@nodedotai.org` (or submit a private vulnerability report via [GitHub Security Advisories](https://github.com/bit-nodedotai/RAGnarok/security/advisories/new)).
 2. **Include Details:**
    * A clear description of the vulnerability.
    * Exact steps to reproduce or a proof of concept (PoC).
@@ -57,5 +59,5 @@ We kindly ask reporters to:
 - Make a good-faith effort to avoid privacy violations, data destruction, and interruption or degradation of service during testing.
 - Not access or modify data belonging to other users.
 
-We appreciate the efforts of security researchers and open-source contributors who help keep RAGnarock safe for everyone.
+We appreciate the efforts of security researchers and open-source contributors who help keep RAGnarok safe for everyone.
 

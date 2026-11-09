@@ -1,4 +1,4 @@
-# RAGnarock — Architecture
+# RAGnarok — Architecture
 
 | | |
 |---|---|
@@ -38,11 +38,11 @@
 
 ## 1. Purpose and scope
 
-RAGnarock is an open-source, contributor-friendly Retrieval-Augmented Generation system. It is designed as a **complete, runnable application** — frontend, backend, database, ingestion pipeline, containerization, and CI — rather than a notebook or a framework demo.
+RAGnarok is an open-source, contributor-friendly Retrieval-Augmented Generation system. It is designed as a **complete, runnable application** — frontend, backend, database, ingestion pipeline, containerization, and CI — rather than a notebook or a framework demo.
 
 The project serves two audiences simultaneously:
 
-- **Learners.** Junior developers who should be able to understand and contribute to a real RAG implementation without wading through a framework.
+- **Learners.** Git Together contributors, and other people learning the codebase, who should be able to change a real RAG implementation without a framework in the way.
 - **Users.** Anyone who wants to upload their own documents and ask questions about them, either locally or through a public demo.
 
 This document describes the architecture that both audiences run. There is **one codebase** and one compose file for the API stack; local development and the hosted demo differ only in configuration and in where the SPA is served (§5.2).
@@ -114,7 +114,7 @@ The embedding model is **in-process** and server-owned. The LLM provider is **re
 
 ## 5. Deployment topologies
 
-RAGnarock supports exactly two environments:
+RAGnarok supports exactly two environments:
 
 | Environment | Orchestration | Runs on | Purpose |
 |---|---|---|---|
@@ -135,7 +135,7 @@ Every contributor runs the entire stack on their own machine. There is no shared
 │  ├── api        (python)    :8000                                │
 │  └── db         (postgres)  :5432  [internal only]               │
 │                                                                  │
-│  named volumes: ragnarock_pgdata, ragnarock_uploads              │
+│  named volumes: ragnarok_pgdata, ragnarok_uploads              │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -199,7 +199,7 @@ Graviton is ARM64, so the hosted API consumes the same `linux/arm64` images CI p
 - **API, database, uploads:** one EC2 Graviton instance. It is the only billable component; there is no managed database, cache, queue, or observability service. AWS includes 100 GB of data transfer out per month, far above demo traffic.
 - **TLS and CI:** Let's Encrypt certificates via Caddy, GitHub Actions for public repositories, and GHCR for public images are free.
 
-No prices, credits, or billing details are committed: hosting economics belong to deployers, per `AGENTS.md` invariant 10.
+No prices, credits, or billing details are committed: hosting economics belong to deployers, per invariant 10 in this document.
 
 ### 5.3 Alternative: managed platform
 
@@ -521,7 +521,7 @@ A second constraint forces the same conclusion: query embeddings must come from 
 | **1 — BYOK** | Supplied by the user per request, used, discarded | Chat completion; later, reranking and web search |
 | **2 — infrastructure** | Held by maintainers, in environment or CI secrets | SSH deploy key, Cloudflare token, backup target, GHCR |
 
-There is **no tier for a maintainer-held model key.** RAGnarock never ships or stores a model provider key.
+There is **no tier for a maintainer-held model key.** RAGnarok never ships or stores a model provider key.
 
 ### 10.3 BYOK flow
 
@@ -618,7 +618,7 @@ All backend configuration is environment-based, validated at startup by pydantic
 
 | Variable | Default | Description |
 |---|---|---|
-| `DATABASE_URL` | `postgresql+psycopg://ragnarock:ragnarock@db:5432/ragnarock` | Must not point at a remote host outside the demo |
+| `DATABASE_URL` | `postgresql+psycopg://ragnarok:ragnarok@db:5432/ragnarok` | Must not point at a remote host outside the demo |
 
 ### 12.3 Storage
 
@@ -817,7 +817,7 @@ The retrieval endpoints double as the observability story: they expose exactly w
 ## 18. Repository layout
 
 ```
-ragnarock/
+ragnarok/
 ├── .github/
 │   ├── workflows/          ci-api.yml, ci-web.yml, docker.yml, nightly.yml
 │   ├── ISSUE_TEMPLATE/
@@ -904,7 +904,7 @@ The layout is deliberately flat rather than a monorepo workspace. Two applicatio
 
 ### v0.1 — Walking skeleton
 
-Document upload (PDF, DOCX, Markdown, text, HTML), ingestion with status, pgvector retrieval, streamed answers with citations, retrieval inspector, local auth, compose, CI, reference deployment. This walking skeleton is the baseline for the 150+ launch-event issues; nothing in v0.2+ is required for the event.
+Document upload (PDF, DOCX, Markdown, text, HTML), ingestion with status, pgvector retrieval, streamed answers with citations, retrieval inspector, local auth, compose, CI, reference deployment. This walking skeleton is the baseline for the 150 Git Together contributor issues. Later roadmap items are not required to finish an issue.
 
 ### v0.2 — Retrieval quality
 

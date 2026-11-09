@@ -1,8 +1,13 @@
-# Contributing to RAGnarock
+# Contributing to RAGnarok
 
-Thank you for your interest in contributing to **RAGnarock**! We are committed to building an approachable, educational, and high-performance open-source RAG application for developers and learners worldwide.
+Thank you for your interest in contributing to **RAGnarok**! We are committed to building an approachable, educational, and high-performance open-source RAG application for developers and learners worldwide.
 
 This guide outlines our project standards, contribution policies, and local development workflows. Please take a few moments to review it before getting started.
+
+> **At Git Together?** You are a contributor, not an operator. Start with the
+> **[Git Together guide](docs/event-guide.md)**. It has setup, the GitHub
+> workflow, how to read an issue, troubleshooting, and the issue index. If you
+> do not write code, use the **[no-code track](docs/event-no-code-track.md)**.
 
 ---
 
@@ -14,7 +19,7 @@ All contributors and maintainers are expected to adhere to our [Code of Conduct]
 
 ## Issue Assignment & Claiming Policy
 
-To ensure fairness and equal opportunity across our ~150 junior contributors, we enforce the following rules:
+Git Together has about 150 contributors and 150 issues. These rules keep that fair:
 
 1. **One Issue at a Time:**
    * Contributors may only be assigned to **one active issue** at any given time.
@@ -25,12 +30,13 @@ To ensure fairness and equal opportunity across our ~150 junior contributors, we
    * Do not open a pull request for an issue assigned to someone else.
 3. **Activity & Auto-Unassign Policy:**
    * If there is no pull request or status update within **48 hours** of assignment, the issue will be unassigned and returned to the contributor pool to prevent issue hoarding.
+   * During a live event, a mentor may unassign after **60 minutes** of inactivity so the issue can be reassigned.
 
 ---
 
 ## Architectural Invariants (Must Read)
 
-Before introducing changes, ensure your implementation adheres to our core invariants (see [AGENTS.md](AGENTS.md) and [docs/architecture.md](docs/architecture.md)):
+Before introducing changes, ensure your implementation adheres to our core invariants (see [docs/architecture.md](docs/architecture.md)):
 
 * **PostgreSQL is the source of truth:** Documents, chunk text, and embeddings live in PostgreSQL with `pgvector`. Vectors are derived data and always rebuildable.
 * **No black-box framework abstractions:** We explicitly do **not** use LangChain, LlamaIndex, Celery, or Redis. The pipeline itself is the curriculum.
@@ -72,12 +78,15 @@ We enforce the [Conventional Commits](https://www.conventionalcommits.org/) spec
 
 ## Local Development & Testing
 
+Git Together setup, including which tools each set needs, is in
+[docs/event-setup.md](docs/event-setup.md). The short version is below.
+
 ### 1. Environment Setup
 
 Clone your fork and navigate into the repository:
 ```bash
-git clone https://github.com/<your-username>/RAGnarock.git
-cd RAGnarock
+git clone https://github.com/<your-username>/RAGnarok.git
+cd RAGnarok
 ```
 
 ### 2. Backend Verification (`backend/`)
@@ -87,7 +96,7 @@ The backend requires **Python 3.12** and **uv**:
 cd backend
 uv sync --extra dev          # Install locked dependencies into .venv
 uv run alembic upgrade head  # Apply migrations (requires Postgres)
-uv run pytest                # Run database-free unit test suite
+uv run pytest -m "not integration"  # Run database-free unit test suite
 uv run ruff check .          # Linting
 uv run ruff format --check . # Format verification
 uv run mypy app              # Strict type checking
@@ -113,9 +122,14 @@ When opening a pull request, please ensure the following:
 
 - [ ] The PR references the issue number it closes (e.g. `Closes #42`).
 - [ ] The change is small, atomic, and focused (ideally under 400 lines of diff).
-- [ ] Backend tests pass and code is formatted (`uv run pytest`, `uv run ruff check .`, `uv run mypy app`).
+- [ ] The acceptance command from the issue passes locally.
+- [ ] Backend tests pass and code is formatted (`uv run pytest -m "not integration"`, `uv run ruff check .`, `uv run mypy app`).
 - [ ] Frontend tests pass and types are clean (`npm run lint`, `npm run typecheck`, `npm test`, `npm run build`).
 - [ ] Any new configuration settings are documented in `app/core/config.py`, `.env.example`, and `docs/architecture.md`.
 - [ ] No secrets, local credentials, `.env` files, or build artifacts are included.
+- [ ] UI changes include a screenshot in the PR description.
 
-Thank you for helping make RAGnarock great!
+Git Together contributors should also read the [GitHub workflow](docs/event-github-workflow.md)
+and the [issue guide](docs/event-issue-guide.md).
+
+Thank you for helping make RAGnarok great!

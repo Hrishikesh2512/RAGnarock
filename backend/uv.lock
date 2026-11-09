@@ -898,7 +898,7 @@ wheels = [
 ]
 
 [[package]]
-name = "ragnarock-api"
+name = "ragnarok-api"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

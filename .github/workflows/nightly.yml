@@ -28,7 +28,7 @@ jobs:
         timeout-minutes: 5
         run: |
           echo "Waiting for PostgreSQL..."
-          until docker compose exec -T db pg_isready -U ragnarock -d ragnarock; do
+          until docker compose exec -T db pg_isready -U ragnarok -d ragnarok; do
             sleep 2
           done
 

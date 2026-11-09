@@ -1,12 +1,16 @@
 # Self-Hosting & Deployment Guide
 
-This guide provides instructions for deploying, configuring, and operating RAGnarock across local development and production environments.
+This page is for **maintainers who run a server**. Git Together contributors do
+not need it. Use [event-setup.md](event-setup.md). Your task is
+one issue and one pull request.
+
+This guide explains how maintainers deploy and operate RAGnarok.
 
 ---
 
 ## Deployment Topologies
 
-RAGnarock supports two deployment topologies:
+RAGnarok supports two deployment topologies:
 
 | Environment | Orchestration | Components | Purpose |
 | :--- | :--- | :--- | :--- |
@@ -17,12 +21,12 @@ RAGnarock supports two deployment topologies:
 
 ## Option 1: Quickstart via Docker Compose (Recommended)
 
-The simplest way to run RAGnarock locally:
+The simplest way to run RAGnarok locally:
 
 ### 1. Clone and Configure
 ```bash
-git clone https://github.com/bit-nodedotai/RAGnarock.git
-cd RAGnarock
+git clone https://github.com/bit-nodedotai/RAGnarok.git
+cd RAGnarok
 cp .env.example .env
 ```
 
@@ -51,7 +55,7 @@ For production deployments on AWS EC2, Oracle Cloud, or any commodity Linux virt
 - **Ports:** Inbound `80/tcp` (HTTP) and `443/tcp` (HTTPS) open; `5432` and `8000` kept internal.
 
 ### 2. Domain & TLS Preparation
-Ensure you have a DNS `A` record pointing to your server's public IP address (for example using a free [DuckDNS](https://www.duckdns.org) subdomain like `ragnarock-api.duckdns.org`). Caddy automatically requests and renews Let's Encrypt TLS certificates.
+Ensure you have a DNS `A` record pointing to your server's public IP address (for example using a free [DuckDNS](https://www.duckdns.org) subdomain like `ragnarok-api.duckdns.org`). Caddy automatically requests and renews Let's Encrypt TLS certificates.
 
 ### 3. Environment Secrets
 Generate cryptographically random secrets:
@@ -80,7 +84,7 @@ curl -fsS https://your-subdomain.duckdns.org/health
 # Expected: {"status":"ok"}
 
 curl -fsS https://your-subdomain.duckdns.org/version
-# Expected: {"name":"RAGnarock","version":"0.1.0","environment":"production"}
+# Expected: {"name":"RAGnarok","version":"0.1.0","environment":"production"}
 ```
 
 ---
@@ -93,7 +97,7 @@ curl -fsS https://your-subdomain.duckdns.org/version
 | `DATABASE_URL` | `postgresql+psycopg://...` | Connection URI for PostgreSQL + pgvector |
 | `AUTH_DISABLED` | `true` (dev) / `false` (prod) | In development, auto-authenticates a default user |
 | `JWT_SECRET` | — | Required when `AUTH_DISABLED=false` |
-| `ALLOWED_ORIGINS` | `""` | Comma-separated CORS allowlist (e.g. `https://ragnarock.vercel.app`) |
+| `ALLOWED_ORIGINS` | `""` | Comma-separated CORS allowlist (e.g. `https://ragnarok.vercel.app`) |
 | `SITE_ADDRESS` | `localhost` | Hostname for Caddy edge automatic TLS provisioning |
 | `API_WORKERS` | `1` | Number of Uvicorn API workers (keep at 1 for 2 GB RAM instances) |
 | `EMBEDDING_PROVIDER` | `local` | `local`, `openrouter`, or `fake` |
@@ -105,12 +109,12 @@ curl -fsS https://your-subdomain.duckdns.org/version
 
 ## Database Backup & Restore
 
-PostgreSQL volumes are persisted in Docker volume `ragnarock_pgdata`.
+PostgreSQL volumes are persisted in Docker volume `ragnarok_pgdata`.
 
 ### Backup Database:
 ```bash
 docker compose -f infra/compose.prod.yml exec -T db \
-  pg_dump -U ragnarock ragnarock | gzip > db-backup-$(date +%F).sql.gz
+  pg_dump -U ragnarok ragnarok | gzip > db-backup-$(date +%F).sql.gz
 ```
 
 ### Restore Database:
@@ -118,7 +122,7 @@ docker compose -f infra/compose.prod.yml exec -T db \
 docker compose -f infra/compose.prod.yml stop api
 gunzip -c db-backup-YYYY-MM-DD.sql.gz | \
   docker compose -f infra/compose.prod.yml exec -T db \
-  psql -U ragnarock -d ragnarock
+  psql -U ragnarok -d ragnarok
 docker compose -f infra/compose.prod.yml start api
 ```
 
