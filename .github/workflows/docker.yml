@@ -33,6 +33,10 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Compute lowercase image namespace
+        id: image
+        run: echo "namespace=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
       - name: Set up QEMU (ARM64 emulation)
         uses: docker/setup-qemu-action@v3
 
@@ -54,7 +58,7 @@ jobs:
           target: runtime
           platforms: linux/amd64,linux/arm64
           push: ${{ startsWith(github.ref, 'refs/tags/v') }}
-          tags: ghcr.io/${{ github.repository }}/api:latest
+          tags: ghcr.io/${{ steps.image.outputs.namespace }}/api:latest
 
       - name: Build Edge image
         uses: docker/build-push-action@v6
@@ -63,5 +67,5 @@ jobs:
           file: infra/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: ${{ startsWith(github.ref, 'refs/tags/v') }}
-          tags: ghcr.io/${{ github.repository }}/edge:latest
+          tags: ghcr.io/${{ steps.image.outputs.namespace }}/edge:latest
 
