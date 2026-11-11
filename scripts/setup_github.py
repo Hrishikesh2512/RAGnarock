@@ -27,18 +27,18 @@ LABELS: dict[str, tuple[str, str]] = {
     "design": ("d876e3", "Design system, UX copy, and accessibility"),
     "accessibility": ("0e8a16", "Keyboard, screen reader, and contrast improvements"),
     "ci": ("cccccc", "GitHub Actions and automation"),
-    "set-1": ("c5def5", "Set 1 — Starter"),
-    "set-2": ("bfd4f2", "Set 2 — Backend"),
-    "set-3": ("d4c5f9", "Set 3 — Frontend & Design"),
+    "set-1": ("c5def5", "Set 1 - Starter"),
+    "set-2": ("bfd4f2", "Set 2 - Backend"),
+    "set-3": ("d4c5f9", "Set 3 - Frontend & Design"),
     "difficulty:beginner": ("0e8a16", "About 20-60 minutes; some reading required"),
     "difficulty:intermediate": ("fbca04", "About 1-2 hours; read the linked source first"),
     "difficulty:advanced": ("b60205", "Multi-file change or significant context required"),
 }
 
 MILESTONES: dict[str, str] = {
-    "Set 1 — Starter": "Docs, focused tests, and tiny tooling fixes.",
-    "Set 2 — Backend": "Small backend helpers, tests, and integrations.",
-    "Set 3 — Frontend & Design": "Reusable React components, hooks, utilities, and design notes.",
+    "Set 1 - Starter": "Docs, focused tests, and tiny tooling fixes.",
+    "Set 2 - Backend": "Small backend helpers, tests, and integrations.",
+    "Set 3 - Frontend & Design": "Reusable React components, hooks, utilities, and design notes.",
 }
 
 

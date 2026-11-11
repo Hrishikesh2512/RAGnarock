@@ -6,9 +6,9 @@ Closes #(issue-number)
 
 ## Git Together
 
-- [ ] Set 1 — Starter
-- [ ] Set 2 — Backend
-- [ ] Set 3 — Frontend & Design
+- [ ] Set 1 - Starter
+- [ ] Set 2 - Backend
+- [ ] Set 3 - Frontend & Design
 - [ ] Not a Git Together contribution
 
 ## Type of Change

@@ -23,9 +23,9 @@ body:
     attributes:
       label: Event set
       options:
-        - Set 1 — Starter
-        - Set 2 — Backend
-        - Set 3 — Frontend & Design
+        - Set 1 - Starter
+        - Set 2 - Backend
+        - Set 3 - Frontend & Design
     validations:
       required: true
   - type: dropdown

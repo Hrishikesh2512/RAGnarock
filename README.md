@@ -28,7 +28,7 @@
 
 ## Overview
 
-RAGnarok is an open-source, contributor-friendly Retrieval-Augmented Generation platform. Unlike tutorial notebooks or black-box framework wrappers (LangChain, LlamaIndex), RAGnarok is built as a **complete, inspectable, and runnable production system** — featuring a typed FastAPI backend, a modern React single-page application, local CPU embeddings, vector search via PostgreSQL with `pgvector`, and Docker containerization.
+RAGnarok is an open-source, contributor-friendly Retrieval-Augmented Generation platform. Unlike tutorial notebooks or black-box framework wrappers (LangChain, LlamaIndex), RAGnarok is built as a **complete, inspectable, and runnable production system** - featuring a typed FastAPI backend, a modern React single-page application, local CPU embeddings, vector search via PostgreSQL with `pgvector`, and Docker containerization.
 
 Designed specifically for developers and open-source contributors, the entire pipeline is implemented in pure Python and TypeScript so every piece of the RAG workflow is transparent and easy to extend.
 
@@ -54,9 +54,9 @@ There are **150 contributor issues**, in three sets of 50. Each person takes
 
 | Set | Your work |
 | :--- | :--- |
-| **Set 1 — Starter** | Documentation, focused tests, and tiny config fixes |
-| **Set 2 — Backend** | Small Python helpers, tests, and one-file integrations |
-| **Set 3 — Frontend & Design** | React components, hooks, utilities, and design notes |
+| **Set 1 - Starter** | Documentation, focused tests, and tiny config fixes |
+| **Set 2 - Backend** | Small Python helpers, tests, and one-file integrations |
+| **Set 3 - Frontend & Design** | React components, hooks, utilities, and design notes |
 
 Start with the **[Git Together guide](docs/event-guide.md)**. It links setup,
 the GitHub workflow, how to read an issue, troubleshooting, and the full index.

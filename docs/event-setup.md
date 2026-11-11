@@ -19,11 +19,11 @@ on setup.
 
 | Your issue | Install |
 | :--- | :--- |
-| No-code docs and config (`set1-01`–`set1-07`, `set1-11`, `set1-14`, `set1-20`–`set1-23`, `set1-25`) | Git + text editor |
-| No-code design (`set3-46`–`set3-50`) | Git + text editor (CSS for `set3-46`) |
+| No-code docs and config (`set1-01`-`set1-07`, `set1-11`, `set1-14`, `set1-20`-`set1-23`, `set1-25`) | Git + text editor |
+| No-code design (`set3-46`-`set3-50`) | Git + text editor (CSS for `set3-46`) |
 | Set 1 backend tests | Git + Python 3.12 + `uv` |
 | Set 2 backend | Git + Python 3.12 + `uv` |
-| Set 3 code (`set3-01`–`set3-45`) | Git + Node.js 22 |
+| Set 3 code (`set3-01`-`set3-45`) | Git + Node.js 22 |
 | Running the full app | Everything above + Docker Desktop |
 
 You do **not** need Docker to finish a Git Together issue. Install it only if you
@@ -37,7 +37,7 @@ guide works for everyone.
 | Tool | Version | Windows | macOS | Linux |
 | :--- | :--- | :--- | :--- | :--- |
 | Git | 2.40+ | [Git for Windows](https://git-scm.com/download/win) | `xcode-select --install` or [git-scm](https://git-scm.com/download/mac) | `sudo apt install git` / `sudo dnf install git` |
-| GitHub account | — | [github.com](https://github.com) | same | same |
+| GitHub account | - | [github.com](https://github.com) | same | same |
 | Docker Desktop | 4.30+ | [Docker Desktop for Windows](https://docs.docker.com/desktop/install/windows-install/) | [Docker Desktop for Mac](https://docs.docker.com/desktop/install/mac-install/) | [Docker Engine](https://docs.docker.com/engine/install/) |
 | Node.js | 22 LTS | [nodejs.org](https://nodejs.org) | [nodejs.org](https://nodejs.org) or `brew install node@22` | [nodesource](https://github.com/nodesource/distributions) |
 | Python | 3.12 | [python.org](https://www.python.org/downloads/) | `brew install python@3.12` | `sudo apt install python3.12` |
@@ -81,7 +81,7 @@ docker compose up --build
 ```
 
 The first run downloads images and installs the backend dependencies, including the
-CPU embedding model. Expect **5–15 minutes** on a typical laptop.
+CPU embedding model. Expect **5-15 minutes** on a typical laptop.
 
 Verify:
 
@@ -166,7 +166,7 @@ git config user.name
 git config user.email
 ```
 
-**Set 3 code (`set3-01`–`set3-45`, frontend):**
+**Set 3 code (`set3-01`-`set3-45`, frontend):**
 
 ```bash
 cd frontend

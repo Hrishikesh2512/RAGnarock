@@ -124,10 +124,10 @@ Small, focused diffs get reviewed and merged faster.
 
 | Set | Minimum before PR |
 | :--- | :--- |
-| Set 1 — docs | The issue's `test -s` / `grep` command |
-| Set 1 — tests | `cd backend && uv run pytest <test-file> -q` |
-| Set 2 — backend | `cd backend && uv run pytest <test-file> -q`, `uv run ruff check <file>` |
-| Set 3 — frontend | `cd frontend && npx vitest run <test-file>`, `npm run typecheck` |
+| Set 1 - docs | The issue's `test -s` / `grep` command |
+| Set 1 - tests | `cd backend && uv run pytest <test-file> -q` |
+| Set 2 - backend | `cd backend && uv run pytest <test-file> -q`, `uv run ruff check <file>` |
+| Set 3 - frontend | `cd frontend && npx vitest run <test-file>`, `npm run typecheck` |
 
 When in doubt, also run the full suite:
 

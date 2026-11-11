@@ -124,7 +124,7 @@ Common causes:
 
 - Unused imports or variables (`noUnusedLocals`, `noUnusedParameters`).
 - A type imported as a value (`verbatimModuleSyntax`). Use `import type { X }`.
-- A missing `@/` path — the alias points at `frontend/src`.
+- A missing `@/` path - the alias points at `frontend/src`.
 
 ```ts
 // Wrong
@@ -214,7 +214,7 @@ uv --version
 ### `uv sync` is slow or appears stuck
 
 The first install downloads PyTorch and `sentence-transformers`, which can be
-several hundred MB. Give it 5–15 minutes on a normal connection. Do not cancel
+several hundred MB. Give it 5-15 minutes on a normal connection. Do not cancel
 repeatedly and restart; that makes it slower.
 
 ```bash

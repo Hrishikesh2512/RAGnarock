@@ -50,7 +50,7 @@ For production deployments on AWS EC2, Oracle Cloud, or any commodity Linux virt
 
 ### 1. System Requirements
 - **OS:** Ubuntu Server 24.04 LTS (ARM64 or x86_64)
-- **Hardware:** 2 vCPU, 2–4 GB RAM, 30 GB SSD
+- **Hardware:** 2 vCPU, 2-4 GB RAM, 30 GB SSD
 - **Swap:** 2 GB swapfile recommended for 2 GB RAM instances
 - **Ports:** Inbound `80/tcp` (HTTP) and `443/tcp` (HTTPS) open; `5432` and `8000` kept internal.
 
@@ -96,7 +96,7 @@ curl -fsS https://your-subdomain.duckdns.org/version
 | `APP_ENV` | `development` | Runtime environment (`development`, `production`, `test`) |
 | `DATABASE_URL` | `postgresql+psycopg://...` | Connection URI for PostgreSQL + pgvector |
 | `AUTH_DISABLED` | `true` (dev) / `false` (prod) | In development, auto-authenticates a default user |
-| `JWT_SECRET` | — | Required when `AUTH_DISABLED=false` |
+| `JWT_SECRET` | - | Required when `AUTH_DISABLED=false` |
 | `ALLOWED_ORIGINS` | `""` | Comma-separated CORS allowlist (e.g. `https://ragnarok.vercel.app`) |
 | `SITE_ADDRESS` | `localhost` | Hostname for Caddy edge automatic TLS provisioning |
 | `API_WORKERS` | `1` | Number of Uvicorn API workers (keep at 1 for 2 GB RAM instances) |

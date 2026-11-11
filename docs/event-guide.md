@@ -44,15 +44,15 @@ You still use Git and the terminal. You do not write Python or JavaScript.
 
 ## How the day works
 
-1. **Setup (30–45 min).** Follow [event-setup.md](event-setup.md) and run the
+1. **Setup (30-45 min).** Follow [event-setup.md](event-setup.md) and run the
    verification commands for your set. Ask a mentor if you are stuck.
 2. **Claim (10 min).** Pick one open issue from your set. Comment on it. Wait
    until it is assigned to you. Read [event-issue-guide.md](event-issue-guide.md).
-3. **Build (2–3 hours).** Follow the issue steps. Change only the listed files.
+3. **Build (2-3 hours).** Follow the issue steps. Change only the listed files.
    Run the acceptance command from the repository root.
 4. **Pull request (30 min).** Follow [event-github-workflow.md](event-github-workflow.md).
    The description must contain `Closes #<issue-number>`.
-5. **Review (30–60 min).** A mentor reviews. You push fixes to the **same branch**.
+5. **Review (30-60 min).** A mentor reviews. You push fixes to the **same branch**.
    A maintainer squash-merges. The issue closes on its own.
 
 ## Rules
@@ -79,8 +79,8 @@ You still use Git and the terminal. You do not write Python or JavaScript.
 - Install Git and a text editor. Everyone needs these.
 - **Docs, config, and design notes:** stop there.
 - **Set 1 tests and Set 2:** also install Python 3.12 and `uv`.
-- **Set 3 code (`set3-01`–`set3-45`):** also install Node.js 22. Docker is optional.
-- **Set 3 design (`set3-46`–`set3-50`):** Git and a text editor. `set3-46` is CSS only.
+- **Set 3 code (`set3-01`-`set3-45`):** also install Node.js 22. Docker is optional.
+- **Set 3 design (`set3-46`-`set3-50`):** Git and a text editor. `set3-46` is CSS only.
 - Read this guide and [CONTRIBUTING.md](../CONTRIBUTING.md).
 - Reply in the event group chat with your operating system and your set.
 

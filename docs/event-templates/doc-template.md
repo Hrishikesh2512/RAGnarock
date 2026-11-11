@@ -15,7 +15,7 @@ How to use this file:
 
 ## <First section from the issue>
 
-<Explain the concept in 2–4 short paragraphs. Prefer examples over theory.>
+<Explain the concept in 2-4 short paragraphs. Prefer examples over theory.>
 
 ```bash
 # A real command from this repository

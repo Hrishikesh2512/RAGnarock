@@ -32,8 +32,8 @@ order is **Set 1 → Set 2 → Set 3**. Set 3 can run at the same time as Set 2.
 | `design` | Design system, UX copy, accessibility, responsive rules |
 | `infra` | Repository tooling, editor config, Dependabot |
 | `ci` | GitHub Actions and automation |
-| `difficulty:beginner` | About 20–60 minutes; read the linked source first |
-| `difficulty:intermediate` | About 1–2 hours; read the linked source first |
+| `difficulty:beginner` | About 20-60 minutes; read the linked source first |
+| `difficulty:intermediate` | About 1-2 hours; read the linked source first |
 | `good first issue` | Safe starting point for a first contribution |
 | `no-code` | No programming required; docs, config, or design work |
 
@@ -68,7 +68,7 @@ Shows the set, difficulty, estimated time, and area. Use this to plan.
 ### Files to touch
 
 The only files you should change. If a file is listed as new, create it. If it
-already exists, stop and ask a mentor — the repository may have moved on.
+already exists, stop and ask a mentor - the repository may have moved on.
 
 Example:
 

@@ -55,9 +55,9 @@ Do not: <example>
 
 ## Examples from this app
 
-- `frontend/src/features/documents/status-badge.tsx` — status colours.
-- `frontend/src/features/chat/chat-panel.tsx` — message layout.
-- `frontend/src/index.css` — base theme and `color-scheme: dark`.
+- `frontend/src/features/documents/status-badge.tsx` - status colours.
+- `frontend/src/features/chat/chat-panel.tsx` - message layout.
+- `frontend/src/index.css` - base theme and `color-scheme: dark`.
 
 ## Do and do not
 

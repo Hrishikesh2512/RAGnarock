@@ -14,7 +14,7 @@ a pull request. You do not deploy anything.
 - Git and a GitHub account.
 - A text editor (VS Code, Cursor, or any editor).
 - A terminal: **Git Bash** or **WSL** on Windows; Terminal on macOS/Linux.
-- 30–60 minutes for one issue.
+- 30-60 minutes for one issue.
 - No Python, no Node.js, no Docker required for the documentation or design issues.
 - `set1-23` and `set1-25` need only Git.
 
@@ -23,7 +23,7 @@ a pull request. You do not deploy anything.
 Start with the first row you have not done. Each person completes **one** issue.
 Comment on the GitHub issue and wait to be assigned before you start.
 
-### Track A — Documentation and configuration (14 issues)
+### Track A - Documentation and configuration (14 issues)
 
 | ID | Issue | What you will produce | Time |
 | :--- | :--- | :--- | ---: |
@@ -42,7 +42,7 @@ Comment on the GitHub issue and wait to be assigned before you start.
 | `set1-21` | When your pull request is stuck | CI, review, and conflicts | 45 min |
 | `set1-22` | Check your local API | Health, version, and docs URLs | 40 min |
 
-### Track B — Design team (5 issues)
+### Track B - Design team (5 issues)
 
 These are for the frontend lead and the design team. They need design judgement,
 not programming.
@@ -62,12 +62,12 @@ not programming.
 
 If you are new to the terminal, do these in order:
 
-1. `set1-05` — practise Git commands in a safe way.
-2. `set1-23` or `set1-25` — a tiny file with an exact shape.
-3. `set1-03` — a guide with commands you can copy from the repository.
+1. `set1-05` - practise Git commands in a safe way.
+2. `set1-23` or `set1-25` - a tiny file with an exact shape.
+3. `set1-03` - a guide with commands you can copy from the repository.
 4. One of `set1-01`, `set1-02`, `set1-06`, `set1-07`.
 
-If you are on the design team, start with `set3-47`, then `set3-48`–`set3-50`, and
+If you are on the design team, start with `set3-47`, then `set3-48`-`set3-50`, and
 leave `set3-46` until the lead confirms the token names.
 
 ## How to do a no-code issue

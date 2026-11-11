@@ -159,7 +159,7 @@ def publish(issue: dict, *, dry_run: bool, show_body: bool) -> bool:
     milestone = issue.get("milestone", "")
 
     if dry_run:
-        print(f"[DRY RUN] {issue['id']} — {title}")
+        print(f"[DRY RUN] {issue['id']} - {title}")
         print(
             f"  set={issue.get('set')} area={issue.get('area')} "
             f"difficulty={issue.get('difficulty')} time={issue.get('estimated_time')}"
@@ -178,7 +178,7 @@ def publish(issue: dict, *, dry_run: bool, show_body: bool) -> bool:
 
     result = run_gh(cmd, check=False)
     if result.returncode == 0:
-        print(f"Published: {result.stdout.strip()} — {title}")
+        print(f"Published: {result.stdout.strip()} - {title}")
         return True
     print(f"Failed: {title}\n{result.stderr.strip()}", file=sys.stderr)
     return False

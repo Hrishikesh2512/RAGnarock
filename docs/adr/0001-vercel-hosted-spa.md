@@ -1,4 +1,4 @@
-# ADR 0001 — Host the SPA on Vercel, keep the API on the VM
+# ADR 0001 - Host the SPA on Vercel, keep the API on the VM
 
 - **Status:** Accepted
 - **Date:** 2026-11-08

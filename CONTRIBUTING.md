@@ -26,7 +26,7 @@ Git Together has about 150 contributors and 150 issues. These rules keep that fa
    * Finish and merge your current pull request before requesting another issue.
 2. **Claiming an Issue:**
    * To work on an issue, comment on the issue ticket expressing your interest.
-   * Maintainers will assign the issue to you with the `assigned` label.
+   * Maintainers will assign the issue to you using GitHub's assignee field.
    * Do not open a pull request for an issue assigned to someone else.
 3. **Activity & Auto-Unassign Policy:**
    * If there is no pull request or status update within **48 hours** of assignment, the issue will be unassigned and returned to the contributor pool to prevent issue hoarding.

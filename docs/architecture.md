@@ -1,4 +1,4 @@
-# RAGnarok — Architecture
+# RAGnarok - Architecture
 
 | | |
 |---|---|
@@ -38,7 +38,7 @@
 
 ## 1. Purpose and scope
 
-RAGnarok is an open-source, contributor-friendly Retrieval-Augmented Generation system. It is designed as a **complete, runnable application** — frontend, backend, database, ingestion pipeline, containerization, and CI — rather than a notebook or a framework demo.
+RAGnarok is an open-source, contributor-friendly Retrieval-Augmented Generation system. It is designed as a **complete, runnable application** - frontend, backend, database, ingestion pipeline, containerization, and CI - rather than a notebook or a framework demo.
 
 The project serves two audiences simultaneously:
 
@@ -56,10 +56,10 @@ This document describes the architecture that both audiences run. There is **one
 | ID | Goal |
 |---|---|
 | G1 | Clone-to-running in under 10 minutes with a single command. |
-| G2 | A complete RAG pipeline — parse, chunk, embed, store, retrieve, generate with citations — implemented in readable application code. |
+| G2 | A complete RAG pipeline - parse, chunk, embed, store, retrieve, generate with citations - implemented in readable application code. |
 | G3 | 150+ contributors can work in parallel on 150+ atomic issues with minimal merge conflicts. |
 | G4 | Green CI with **zero repository secrets** for contributors and fork PRs. |
-| G5 | The full stack runs online — SPA on a static host, API and database on a single commodity VM — functionally, not as a static mock. |
+| G5 | The full stack runs online - SPA on a static host, API and database on a single commodity VM - functionally, not as a static mock. |
 | G6 | No vendor lock-in: every external dependency sits behind an interface. |
 | G7 | User credentials are never persisted by the server. |
 
@@ -84,7 +84,7 @@ This document describes the architecture that both audiences run. There is **one
 4. **Interfaces at every boundary.** `VectorStore`, `StorageBackend`, `EmbeddingProvider`, `LLMProvider`, `Parser`, `Chunker`. Swapping an implementation is a configuration change.
 5. **Keyless by default.** The application is useful before the user supplies any credential.
 6. **One artifact, two environments.** Local and production use the same API images and the same compose file. The SPA is the single exception: Vite builds it locally, Vercel builds it for the hosted demo.
-7. **Small files, single responsibility.** One route module, parser, or component per file — this is what makes atomic issue decomposition possible.
+7. **Small files, single responsibility.** One route module, parser, or component per file - this is what makes atomic issue decomposition possible.
 
 ---
 
@@ -172,12 +172,12 @@ Internet
 
 | Property | Value |
 |---|---|
-| Compute | AWS EC2 `t4g.medium` — Graviton (ARM64), 2 vCPU / 4 GB; the **only deployer-funded resource** |
+| Compute | AWS EC2 `t4g.medium` - Graviton (ARM64), 2 vCPU / 4 GB; the **only deployer-funded resource** |
 | Architecture | `linux/arm64` for the API images; the SPA is built by Vercel |
 | Storage | 30 GB gp3 root volume; persistent volumes for Postgres data and uploads |
 | HTTPS | Caddy automatic certificates on the API host; Vercel-managed certificates on the SPA host |
 | Frontend delivery | Vercel builds `frontend/` on every push: a production URL, immutable asset URLs, and a preview deployment per pull request. `frontend/vercel.json` rewrites every path to `/index.html` so client-side deep links work. |
-| Vercel plan | Hobby — free, non-commercial use only. Includes 100 GB fast data transfer, 1,000,000 CDN requests, and 100 deployments per day; preview deployments count toward the daily deployment allowance. |
+| Vercel plan | Hobby - free, non-commercial use only. Includes 100 GB fast data transfer, 1,000,000 CDN requests, and 100 deployments per day; preview deployments count toward the daily deployment allowance. |
 | Build settings | Root directory `frontend`, build command `npm run build`, output directory `dist`, and the Node version declared in `frontend/package.json` (`>=22`). |
 | Origin policy | Cross-origin. The API accepts only the exact origins in `ALLOWED_ORIGINS`; a wildcard is never valid, and CORS is not an authorization boundary. |
 | Session transport | Bearer tokens in the `Authorization` header; the hosted demo does not use third-party cookies (§13.4). |
@@ -517,9 +517,9 @@ A second constraint forces the same conclusion: query embeddings must come from 
 
 | Tier | Definition | Applies to |
 |---|---|---|
-| **0 — keyless** | No credential of any kind | Parsing, chunking, embeddings, pgvector, prompt assembly, auth |
-| **1 — BYOK** | Supplied by the user per request, used, discarded | Chat completion; later, reranking and web search |
-| **2 — infrastructure** | Held by maintainers, in environment or CI secrets | SSH deploy key, Cloudflare token, backup target, GHCR |
+| **0 - keyless** | No credential of any kind | Parsing, chunking, embeddings, pgvector, prompt assembly, auth |
+| **1 - BYOK** | Supplied by the user per request, used, discarded | Chat completion; later, reranking and web search |
+| **2 - infrastructure** | Held by maintainers, in environment or CI secrets | SSH deploy key, Cloudflare token, backup target, GHCR |
 
 There is **no tier for a maintainer-held model key.** RAGnarok never ships or stores a model provider key.
 
@@ -543,7 +543,7 @@ Browser                         API                          Provider
 | Property | Implementation |
 |---|---|
 | Storage | `sessionStorage` in the browser; cleared when the tab closes |
-| Transport | HTTPS only, custom header — never a query parameter |
+| Transport | HTTPS only, custom header - never a query parameter |
 | Server handling | Request-scoped only; not cached, not queued, not stored |
 | Logging | Redaction filter strips `authorization` and `x-provider-key` |
 | Error surfaces | Key never appears in responses, stack traces, or telemetry |
@@ -662,7 +662,7 @@ All backend configuration is environment-based, validated at startup by pydantic
 | Variable | Default | Description |
 |---|---|---|
 | `AUTH_DISABLED` | `true` | Local development only |
-| `JWT_SECRET` | — | Required when `AUTH_DISABLED=false` |
+| `JWT_SECRET` | - | Required when `AUTH_DISABLED=false` |
 | `JWT_EXPIRE_MINUTES` | `60` | |
 | `GUEST_SESSION_TTL_HOURS` | `168` | 7-day purge window |
 | `MAX_DOCS_PER_SESSION` | `5` | |
@@ -902,19 +902,19 @@ The layout is deliberately flat rather than a monorepo workspace. Two applicatio
 
 ## 20. Roadmap
 
-### v0.1 — Walking skeleton
+### v0.1 - Walking skeleton
 
 Document upload (PDF, DOCX, Markdown, text, HTML), ingestion with status, pgvector retrieval, streamed answers with citations, retrieval inspector, local auth, compose, CI, reference deployment. This walking skeleton is the baseline for the 150 Git Together contributor issues. Later roadmap items are not required to finish an issue.
 
-### v0.2 — Retrieval quality
+### v0.2 - Retrieval quality
 
 Qdrant as an alternative `VectorStore`. Hybrid search (Postgres `tsvector` + vectors) with reciprocal rank fusion. Local cross-encoder reranking. Chunking strategy selection per document.
 
-### v0.3 — Evaluation
+### v0.3 - Evaluation
 
 Golden-question fixtures, recall@k and answer-grounding metrics, a CI report on retrieval regressions. This is the feature that distinguishes a teaching repository from a demo.
 
-### v0.4 — Scale and operations
+### v0.4 - Scale and operations
 
 Durable job queue, S3 storage backend, tracing backend, multi-workspace sharing.
 

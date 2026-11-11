@@ -1,4 +1,4 @@
-# Git Together — 150 contributor issues for RAGnarok
+# Git Together - 150 contributor issues for RAGnarok
 # Three sets of 50. This file is the source of truth.
 # Every issue is contributor work: one person, one pull request.
 # Validate with: python3 scripts/validate_issues.py
@@ -10,17 +10,17 @@ total_issues: 150
 sets:
 - id: set-1
   name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   focus: Documentation, focused tests, and tiny tooling fixes.
   issue_count: 50
 - id: set-2
   name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   focus: Small, self-contained backend helpers, tests, and integrations.
   issue_count: 50
 - id: set-3
   name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   focus: Reusable React components, hooks, utilities, and design notes.
   issue_count: 50
 issues:
@@ -28,7 +28,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the native local development guide'
   area: docs
   difficulty: beginner
@@ -64,7 +64,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the Docker development guide'
   area: docs
   difficulty: beginner
@@ -100,7 +100,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the testing guide'
   area: docs
   difficulty: beginner
@@ -136,7 +136,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the code style guide'
   area: docs
   difficulty: beginner
@@ -171,7 +171,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the Git command cheat sheet'
   area: docs
   difficulty: beginner
@@ -207,7 +207,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the backend troubleshooting guide'
   area: docs
   difficulty: beginner
@@ -243,7 +243,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the frontend troubleshooting guide'
   area: docs
   difficulty: beginner
@@ -279,7 +279,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the architecture tour'
   area: docs
   difficulty: beginner
@@ -314,7 +314,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: explain the RAG pipeline end to end'
   area: docs
   difficulty: beginner
@@ -349,7 +349,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: add API usage examples with curl'
   area: docs
   difficulty: beginner
@@ -384,7 +384,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: document every environment variable'
   area: docs
   difficulty: beginner
@@ -420,7 +420,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the database and migration guide'
   area: docs
   difficulty: beginner
@@ -454,7 +454,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: write the security overview'
   area: docs
   difficulty: beginner
@@ -488,7 +488,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: explain what happens after your pull request merges'
   area: docs
   difficulty: beginner
@@ -526,7 +526,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: add ADR 0002 for synchronous SQLAlchemy'
   area: docs
   difficulty: beginner
@@ -560,7 +560,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: add ADR 0003 for BYOK provider keys'
   area: docs
   difficulty: beginner
@@ -594,7 +594,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: add ADR 0004 for fake providers in tests'
   area: docs
   difficulty: beginner
@@ -628,7 +628,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: add ADR 0005 for local CPU embeddings'
   area: docs
   difficulty: beginner
@@ -662,7 +662,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: add ADR 0006 for single-VM deployment'
   area: docs
   difficulty: beginner
@@ -698,7 +698,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: explain how to reset your local database'
   area: docs
   difficulty: beginner
@@ -736,7 +736,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: explain what to do when your pull request is stuck'
   area: docs
   difficulty: beginner
@@ -773,7 +773,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'docs: explain how to check your local API'
   area: docs
   difficulty: beginner
@@ -810,7 +810,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'infra: add an .editorconfig for consistent formatting'
   area: infra
   difficulty: beginner
@@ -842,7 +842,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'infra: add an optional pre-commit configuration'
   area: infra
   difficulty: beginner
@@ -873,7 +873,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'ci: add Dependabot for Actions, Python, and npm'
   area: infra
   difficulty: beginner
@@ -905,7 +905,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover empty and whitespace-only chunking input'
   area: test
   difficulty: beginner
@@ -938,7 +938,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover chunk overlap at paragraph boundaries'
   area: test
   difficulty: beginner
@@ -971,7 +971,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover hard splitting of a very long paragraph'
   area: test
   difficulty: beginner
@@ -1004,7 +1004,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover fake embedding vector shape'
   area: test
   difficulty: beginner
@@ -1037,7 +1037,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover fake embedding of empty text'
   area: test
   difficulty: beginner
@@ -1070,7 +1070,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover the fake LLM fallback message'
   area: test
   difficulty: beginner
@@ -1103,7 +1103,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover fake LLM citation extraction'
   area: test
   difficulty: beginner
@@ -1136,7 +1136,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover prompt passage numbering'
   area: test
   difficulty: beginner
@@ -1169,7 +1169,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover prompt context budget truncation'
   area: test
   difficulty: beginner
@@ -1202,7 +1202,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover prompt building with no retrieved results'
   area: test
   difficulty: beginner
@@ -1235,7 +1235,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover application setting defaults'
   area: test
   difficulty: beginner
@@ -1268,7 +1268,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover comma-separated list settings'
   area: test
   difficulty: beginner
@@ -1301,7 +1301,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover production safety rules'
   area: test
   difficulty: beginner
@@ -1334,7 +1334,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover allowed CORS mutations'
   area: test
   difficulty: beginner
@@ -1367,7 +1367,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover blocked CORS origins'
   area: test
   difficulty: beginner
@@ -1400,7 +1400,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover the health endpoint payload'
   area: test
   difficulty: beginner
@@ -1433,7 +1433,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover the version endpoint payload'
   area: test
   difficulty: beginner
@@ -1466,7 +1466,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover the API error envelope'
   area: test
   difficulty: beginner
@@ -1499,7 +1499,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover the validation error envelope'
   area: test
   difficulty: beginner
@@ -1532,7 +1532,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover the not-found error envelope'
   area: test
   difficulty: beginner
@@ -1565,7 +1565,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover password hash round trips'
   area: test
   difficulty: beginner
@@ -1598,7 +1598,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover malformed password hashes'
   area: test
   difficulty: beginner
@@ -1631,7 +1631,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover access-token round trips'
   area: test
   difficulty: beginner
@@ -1664,7 +1664,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover expired access tokens'
   area: test
   difficulty: beginner
@@ -1697,7 +1697,7 @@ issues:
   set: set-1
   set_number: 1
   set_name: Starter
-  milestone: Set 1 — Starter
+  milestone: Set 1 - Starter
   title: 'test: cover invalid token signatures'
   area: test
   difficulty: beginner
@@ -1730,7 +1730,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add upload validation helpers'
   area: backend
   difficulty: beginner
@@ -1743,9 +1743,11 @@ issues:
   - good first issue
   files_to_touch:
   - backend/app/core/validation/upload.py
+  - backend/app/core/validation/__init__.py
   - backend/tests/test_validation_upload.py
   new_files:
   - backend/app/core/validation/upload.py
+  - backend/app/core/validation/__init__.py
   - backend/tests/test_validation_upload.py
   depends_on: []
   description: Add a small backend helper module for validate_filename, validate_mime_type, validate_size.
@@ -1754,6 +1756,8 @@ issues:
   - Read the closest existing module before starting.
   - 'Create `backend/app/core/validation/upload.py`. Expose only: `validate_filename, validate_mime_type,
     validate_size`.'
+  - Create `backend/app/core/validation/__init__.py` (it can be empty) so the new directory is a package
+    like the other `app/` packages.
   - Keep the module dependency-free and typed; do not touch FastAPI routes in this issue.
   - 'Cover these behaviours: Return a safe basename for path-like names. Reject empty names. Accept only
     configured MIME types. Reject sizes above the configured limit.'
@@ -1767,7 +1771,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add query normalization helpers'
   area: backend
   difficulty: beginner
@@ -1803,7 +1807,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add pagination normalization helpers'
   area: backend
   difficulty: beginner
@@ -1839,7 +1843,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add email normalization helpers'
   area: backend
   difficulty: beginner
@@ -1875,7 +1879,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add password policy helpers'
   area: backend
   difficulty: beginner
@@ -1911,7 +1915,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add UUID parsing helpers'
   area: backend
   difficulty: beginner
@@ -1946,7 +1950,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add time helpers'
   area: backend
   difficulty: beginner
@@ -1981,7 +1985,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add URL joining helpers'
   area: backend
   difficulty: beginner
@@ -2016,7 +2020,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add text normalization helpers'
   area: backend
   difficulty: beginner
@@ -2051,7 +2055,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add an in-memory token bucket'
   area: backend
   difficulty: beginner
@@ -2086,7 +2090,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add chunk parameter helpers'
   area: backend
   difficulty: intermediate
@@ -2098,9 +2102,11 @@ issues:
   - difficulty:intermediate
   files_to_touch:
   - backend/app/services/chunk_service.py
+  - backend/app/services/__init__.py
   - backend/tests/test_chunk_service.py
   new_files:
   - backend/app/services/chunk_service.py
+  - backend/app/services/__init__.py
   - backend/tests/test_chunk_service.py
   depends_on: []
   description: Add a small backend helper module for normalize_chunk_params. It must be testable without
@@ -2108,6 +2114,8 @@ issues:
   steps:
   - Read the closest existing module before starting.
   - 'Create `backend/app/services/chunk_service.py`. Expose only: `normalize_chunk_params`.'
+  - Create `backend/app/services/__init__.py` (it can be empty) so the new directory is a package like
+    the other `app/` packages.
   - Keep the module dependency-free and typed; do not touch FastAPI routes in this issue.
   - 'Cover these behaviours: Default to the chunker defaults. Reject `max_chars < 1`. Reject `overlap
     >= max_chars`. Return a typed pair.'
@@ -2120,7 +2128,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add prompt truncation helpers'
   area: backend
   difficulty: intermediate
@@ -2155,7 +2163,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add retrieval score helpers'
   area: backend
   difficulty: intermediate
@@ -2189,7 +2197,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add document metadata helpers'
   area: backend
   difficulty: intermediate
@@ -2224,7 +2232,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add citation formatting helpers'
   area: backend
   difficulty: intermediate
@@ -2258,7 +2266,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a Markdown export helper'
   area: backend
   difficulty: intermediate
@@ -2292,7 +2300,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add document statistics helpers'
   area: backend
   difficulty: intermediate
@@ -2326,7 +2334,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add file type detection helpers'
   area: backend
   difficulty: intermediate
@@ -2360,7 +2368,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add token metadata helpers'
   area: backend
   difficulty: intermediate
@@ -2394,7 +2402,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add health payload helpers'
   area: backend
   difficulty: intermediate
@@ -2428,7 +2436,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add shared error schemas'
   area: backend
   difficulty: intermediate
@@ -2462,7 +2470,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add pagination schemas'
   area: backend
   difficulty: intermediate
@@ -2497,7 +2505,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add API path validators'
   area: backend
   difficulty: intermediate
@@ -2531,7 +2539,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add response helpers'
   area: backend
   difficulty: intermediate
@@ -2565,7 +2573,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add request-id middleware helpers'
   area: backend
   difficulty: intermediate
@@ -2589,6 +2597,8 @@ issues:
   steps:
   - Read the closest existing module before starting.
   - 'Create `backend/app/api/middleware/request_id.py`. Expose only: `request_id_middleware, get_request_id`.'
+  - Create `backend/app/api/middleware/__init__.py` (it can be empty) so the new directory is a package
+    like the other `app/` packages.
   - Keep the module dependency-free and typed; do not touch FastAPI routes in this issue.
   - 'Cover these behaviours: Accept a valid `X-Request-Id`. Generate a UUID when missing. Expose the id
     through a context variable. Add the id to the response headers.'
@@ -2601,7 +2611,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add uptime to the version response'
   area: backend
   difficulty: intermediate
@@ -2634,7 +2644,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: use the safe filename helper on upload'
   area: backend
   difficulty: intermediate
@@ -2668,7 +2678,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: normalize search queries before retrieval'
   area: backend
   difficulty: intermediate
@@ -2702,7 +2712,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: normalize chat questions before retrieval'
   area: backend
   difficulty: intermediate
@@ -2736,7 +2746,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: normalize emails in auth routes'
   area: backend
   difficulty: intermediate
@@ -2770,7 +2780,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: validate UUID subjects with a helper'
   area: backend
   difficulty: intermediate
@@ -2804,7 +2814,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: include request ids in API errors'
   area: backend
   difficulty: intermediate
@@ -2838,7 +2848,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: tag the search and chat routers'
   area: backend
   difficulty: intermediate
@@ -2870,7 +2880,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: validate the upload size setting'
   area: backend
   difficulty: intermediate
@@ -2903,7 +2913,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a password policy function'
   area: backend
   difficulty: intermediate
@@ -2937,7 +2947,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: propagate request ids into structured logs'
   area: backend
   difficulty: intermediate
@@ -2971,7 +2981,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: configure connection recycling'
   area: backend
   difficulty: intermediate
@@ -3004,7 +3014,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: export the naming convention'
   area: backend
   difficulty: intermediate
@@ -3037,7 +3047,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a safe User repr'
   area: backend
   difficulty: intermediate
@@ -3070,7 +3080,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a safe Document repr'
   area: backend
   difficulty: intermediate
@@ -3101,7 +3111,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a safe Chunk repr'
   area: backend
   difficulty: intermediate
@@ -3134,7 +3144,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: export the embedding dimension constant'
   area: backend
   difficulty: intermediate
@@ -3166,7 +3176,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: expose the fake embedder tokenizer'
   area: backend
   difficulty: intermediate
@@ -3199,7 +3209,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a cache reset helper for embedders'
   area: backend
   difficulty: intermediate
@@ -3232,7 +3242,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: describe the local embedder'
   area: backend
   difficulty: intermediate
@@ -3265,7 +3275,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: describe the fake LLM provider'
   area: backend
   difficulty: intermediate
@@ -3298,7 +3308,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add a cache reset helper for LLM providers'
   area: backend
   difficulty: intermediate
@@ -3331,7 +3341,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: extract OpenRouter error mapping'
   area: backend
   difficulty: intermediate
@@ -3365,7 +3375,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'backend: add request-id middleware to the app'
   area: backend
   difficulty: intermediate
@@ -3399,7 +3409,7 @@ issues:
   set: set-2
   set_number: 2
   set_name: Backend
-  milestone: Set 2 — Backend
+  milestone: Set 2 - Backend
   title: 'test: assert the package version matches pyproject'
   area: test
   difficulty: beginner
@@ -3433,7 +3443,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a class-name helper'
   area: frontend
   difficulty: beginner
@@ -3469,7 +3479,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a byte formatter'
   area: frontend
   difficulty: beginner
@@ -3505,7 +3515,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a relative date formatter'
   area: frontend
   difficulty: beginner
@@ -3542,7 +3552,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a truncation helper'
   area: frontend
   difficulty: beginner
@@ -3578,7 +3588,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an error normalizer'
   area: frontend
   difficulty: beginner
@@ -3615,7 +3625,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a citation parser'
   area: frontend
   difficulty: beginner
@@ -3652,7 +3662,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a typed session-storage wrapper'
   area: frontend
   difficulty: beginner
@@ -3688,7 +3698,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add shared UI constants'
   area: frontend
   difficulty: beginner
@@ -3725,7 +3735,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add form validators'
   area: frontend
   difficulty: beginner
@@ -3761,7 +3771,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a text-download helper'
   area: frontend
   difficulty: beginner
@@ -3797,7 +3807,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a debounce hook'
   area: frontend
   difficulty: intermediate
@@ -3831,7 +3841,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a local-storage hook'
   area: frontend
   difficulty: intermediate
@@ -3866,7 +3876,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a media-query hook'
   area: frontend
   difficulty: intermediate
@@ -3900,7 +3910,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an online-status hook'
   area: frontend
   difficulty: intermediate
@@ -3934,7 +3944,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a copy-to-clipboard hook'
   area: frontend
   difficulty: intermediate
@@ -3969,7 +3979,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an auto-scroll hook'
   area: frontend
   difficulty: intermediate
@@ -4004,7 +4014,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a key-press hook'
   area: frontend
   difficulty: intermediate
@@ -4039,7 +4049,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a document-title hook'
   area: frontend
   difficulty: intermediate
@@ -4074,7 +4084,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a focus-trap hook'
   area: frontend
   difficulty: intermediate
@@ -4109,7 +4119,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a theme hook'
   area: frontend
   difficulty: intermediate
@@ -4143,7 +4153,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Button component'
   area: frontend
   difficulty: beginner
@@ -4179,7 +4189,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Card component'
   area: frontend
   difficulty: beginner
@@ -4214,7 +4224,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an Input component'
   area: frontend
   difficulty: beginner
@@ -4249,7 +4259,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Textarea component'
   area: frontend
   difficulty: beginner
@@ -4284,7 +4294,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Badge component'
   area: frontend
   difficulty: beginner
@@ -4319,7 +4329,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Spinner component'
   area: frontend
   difficulty: beginner
@@ -4354,7 +4364,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an EmptyState component'
   area: frontend
   difficulty: intermediate
@@ -4389,7 +4399,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an ErrorBanner component'
   area: frontend
   difficulty: intermediate
@@ -4423,7 +4433,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a ProgressBar component'
   area: frontend
   difficulty: intermediate
@@ -4457,7 +4467,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Skeleton component'
   area: frontend
   difficulty: intermediate
@@ -4491,7 +4501,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Modal component'
   area: frontend
   difficulty: intermediate
@@ -4525,7 +4535,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a ConfirmDialog component'
   area: frontend
   difficulty: intermediate
@@ -4559,7 +4569,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Toast component'
   area: frontend
   difficulty: intermediate
@@ -4593,7 +4603,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Tooltip component'
   area: frontend
   difficulty: intermediate
@@ -4627,7 +4637,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Tabs component'
   area: frontend
   difficulty: intermediate
@@ -4661,7 +4671,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a DocumentRow component'
   area: frontend
   difficulty: intermediate
@@ -4698,7 +4708,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a DocumentList component'
   area: frontend
   difficulty: intermediate
@@ -4734,7 +4744,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add an UploadForm component'
   area: frontend
   difficulty: intermediate
@@ -4769,7 +4779,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a ChunkDrawer component'
   area: frontend
   difficulty: intermediate
@@ -4805,7 +4815,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a ChatMessage component'
   area: frontend
   difficulty: intermediate
@@ -4840,7 +4850,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a ChatComposer component'
   area: frontend
   difficulty: intermediate
@@ -4876,7 +4886,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a CitationList component'
   area: frontend
   difficulty: intermediate
@@ -4911,7 +4921,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a MessageActions component'
   area: frontend
   difficulty: intermediate
@@ -4947,7 +4957,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Header component'
   area: frontend
   difficulty: intermediate
@@ -4982,7 +4992,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add a Sidebar component'
   area: frontend
   difficulty: intermediate
@@ -5017,7 +5027,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'frontend: add design tokens and import them'
   area: frontend
   difficulty: beginner
@@ -5052,7 +5062,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'docs: write the design system reference'
   area: design
   difficulty: beginner
@@ -5088,7 +5098,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'docs: write the accessibility checklist'
   area: design
   difficulty: beginner
@@ -5123,7 +5133,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'docs: write the UX copy guide'
   area: design
   difficulty: beginner
@@ -5158,7 +5168,7 @@ issues:
   set: set-3
   set_number: 3
   set_name: Frontend & Design
-  milestone: Set 3 — Frontend & Design
+  milestone: Set 3 - Frontend & Design
   title: 'docs: write the responsive layout guide'
   area: design
   difficulty: beginner
